@@ -1,5 +1,7 @@
 stages:
   - test
 
+image: golang:1.12.6
+
 include:
   - "https://raw.githubusercontent.com/Fallion/gitlab-ci-templates/master/go/lint.yaml"
