@@ -2,4 +2,4 @@ stages:
   - test
 
 include:
-  - "https://raw.githubusercontent.com/Fallion/gitlab-ci-templates/master/golang-ci-lint.yaml"
+  - "https://raw.githubusercontent.com/Fallion/gitlab-ci-templates/master/go/lint.yaml"
