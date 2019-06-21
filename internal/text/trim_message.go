@@ -1,7 +1,6 @@
 package text
 
 import (
-	"log"
 	"regexp"
 	"strings"
 )
@@ -13,8 +12,6 @@ func TrimMessage(message string) string {
 	match := messageRegex.FindString(message)
 
 	match = strings.Replace(match, "\n", "", 1)
-
-	log.Println(match)
 
 	return match
 }
