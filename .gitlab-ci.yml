@@ -11,5 +11,5 @@ release-notary:
   stage: release
   script:
     - make build
-    - cd build
-    - release-notary log
+    - mv build/release-notary .
+    - ./release-notary log
