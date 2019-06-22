@@ -13,3 +13,5 @@ release-notary:
     - make build
     - mv build/release-notary .
     - ./release-notary log
+  only:
+    - tags
