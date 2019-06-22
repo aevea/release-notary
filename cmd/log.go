@@ -34,6 +34,6 @@ var logCmd = &cobra.Command{
 			)
 		}
 
-		log.Println("\n", text.BuildHistory(commitMessages))
+		log.Println(text.BuildHistory(commitMessages))
 	},
 }

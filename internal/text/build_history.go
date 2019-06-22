@@ -7,6 +7,7 @@ import (
 // BuildHistory takes commit messages and builds a complete list
 func BuildHistory(messages []string) string {
 	builder := strings.Builder{}
+	builder.WriteString("\n")
 
 	for i := 0; i < len(messages); i++ {
 		builder.WriteString("- ")
