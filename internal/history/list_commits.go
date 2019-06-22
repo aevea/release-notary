@@ -20,6 +20,10 @@ func CommitsBetween(repo *git.Repository, from plumbing.Hash, to plumbing.Hash) 
 
 	err := cIter.ForEach(func(c *object.Commit) error {
 		commits = append(commits, c.Hash)
+		// If no previous tag is found then from and to are equal
+		if from == to {
+			return nil
+		}
 		if c.Hash == to {
 			return errReachedToCommit
 		}
