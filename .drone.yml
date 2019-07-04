@@ -17,7 +17,9 @@ steps:
 
   - name: release
     image: golang
-    secrets: [GITHUB_TOKEN]
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
     volumes:
       - name: deps
         path: /go
