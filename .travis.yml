@@ -35,7 +35,7 @@ deploy:
   skip_cleanup: true
   api_key:
     # Your *encrypted* GitHub key, as the output of the Travis CI CLI tool.
-    secure: $GITHUB_TOKEN
+    secure: 4JLK2nRF0dL7AhiArTqHrzGhiTjBUGms4mXfuJpnM7U1kDXPXG4ZgXthRMikjHXayqUIEV05Amcr40L+SIR/jn+ol6P5ErYNJmbc8DkzfTo0rWuz7L5WQK4LgSWDiM8AjuW74XP4kRK29Y+k/NuAN6G0mKFgkwrqLDoxy+mkvekBCMtBMcPtfpFIRQw1pAmMGNmnRBgFF9vWKNuLRed8s4zgMhPKP68Pr646DprAimvgJqEwnsxW56HxDgzp8i3U/+ybXkDDYLsP1Iey4R9FOxAojeHDy+4l5pmMt3h2ISj+uVXBlZsxZQqgUKYMIgX+UgrB87GLcKjfZb/Qwacnnpx7k570pmHzdzRJPOOiLa9uthooDwgEuHlF0r3BqLwKATqvH+VFrixMVxbL87V5F+gWGnsHD3PdgA0G7mIhEmxs1kPcBb6/wfJisWjASDsq4m3gSXkb05I29vLRkmEvHaJF1ReXkS8hGtmxxvsoU8lZuhsnV0Ljq2z04oo8UhbkQudPihbZOfbKHyfpzJPrxX6SQ1EZXwtrTBEyroRq3uJuYmVPeqNLfzD8fu+t/PzejES+MXMOFJyjYmD5/04a1Y5CqSYi6npD+pNftWtbBx1NT0bnLgNZbMWpb54V5WDMsgDD4UOnaU40jqySjmXe2fvQien346hMokk4vSc5kkk=
   file:
     # The names of the binaries to output, based on the -output template passed to gox.
     - release-notary.windows.amd64.exe
