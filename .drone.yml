@@ -1,0 +1,23 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go test -race -v ./... -cover
+
+  - name: build
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go build
+
+volumes:
+  - name: deps
+    temp: {}
