@@ -6,11 +6,8 @@ matrix:
     # e.g. "1.x" is 1.11 until 1.11.1 is available.
     - go: 1.x
       env: LATEST=true
-    - go: 1.7.x
-    - go: 1.8.x
-    - go: 1.9.x
-    - go: 1.10.x
     - go: 1.11.x
+    - go: 1.12.x
     - go: tip
   allow_failures:
     - go: tip
@@ -18,9 +15,6 @@ matrix:
 before_install:
   # gox simplifies building for multiple architectures
   - go get github.com/mitchellh/gox
-
-install:
-  -  # skip
 
 script:
   - go get -t -v ./...
@@ -33,9 +27,9 @@ script:
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key: $GITHUB_TOKEN
+  api_key:
     # Your *encrypted* GitHub key, as the output of the Travis CI CLI tool.
-    secure: 
+    secure: $GITHUB_TOKEN
   file:
     # The names of the binaries to output, based on the -output template passed to gox.
     - logshare.windows.amd64.exe
@@ -43,7 +37,7 @@ deploy:
     - logshare.linux.amd64
   on:
     # What to repository to build
-    repo: username/reponame
+    repo: fallion/release-notary
     # Only build binaries for tagged commits
     tags: true
     condition: $LATEST = true
