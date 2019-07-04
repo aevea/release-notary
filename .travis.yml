@@ -28,7 +28,7 @@ script:
   - diff -u <(echo -n) <(gofmt -d .)
   - go test -v -race ./...
   # Only build binaries from the latest Go release.
-  - if [ "${LATEST}" = "true" ]; then gox -os="linux darwin windows" -arch="amd64" -output="release-notary.." -ldflags "-X main.Rev=`git rev-parse --short HEAD`" -verbose ./...; fi
+  - if [ "${LATEST}" = "true" ]; then gox -os="linux darwin windows" -arch="amd64" -output="release-notary.." -ldflags "-X main.Rev=`git rev-parse --short HEAD`" -verbose ./main.go; fi
 
 deploy:
   provider: releases
