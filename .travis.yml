@@ -5,7 +5,9 @@ matrix:
     # "1.x" always refers to the latest Go version, inc. the patch release.
     # e.g. "1.x" is 1.11 until 1.11.1 is available.
     - go: 1.x
-      env: LATEST=true
+      env:
+        - LATEST=true
+        - GO111MODULE=on
     - go: 1.11.x
     - go: 1.12.x
     - go: tip
@@ -16,13 +18,17 @@ before_install:
   # gox simplifies building for multiple architectures
   - go get github.com/mitchellh/gox
 
+env:
+  - GO111MODULE=on
+
+install: true
+
 script:
-  - go get -t -v ./...
+  - go mod download
   - diff -u <(echo -n) <(gofmt -d .)
-  - go vet $(go list ./... | grep -v /vendor/)
   - go test -v -race ./...
   # Only build binaries from the latest Go release.
-  - if [ "${LATEST}" = "true" ]; then gox -os="linux darwin windows" -arch="amd64" -output="logshare.." -ldflags "-X main.Rev=`git rev-parse --short HEAD`" -verbose ./...; fi
+  - if [ "${LATEST}" = "true" ]; then gox -os="linux darwin windows" -arch="amd64" -output="release-notary.." -ldflags "-X main.Rev=`git rev-parse --short HEAD`" -verbose ./...; fi
 
 deploy:
   provider: releases
@@ -37,7 +43,7 @@ deploy:
     - logshare.linux.amd64
   on:
     # What to repository to build
-    repo: fallion/release-notary
+    repo: Fallion/release-notary
     # Only build binaries for tagged commits
     tags: true
     condition: $LATEST = true
