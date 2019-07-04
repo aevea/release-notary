@@ -15,14 +15,6 @@ steps:
     commands:
       - go test -race -v ./... -cover
 
-  - name: build
-    image: golang
-    volumes:
-      - name: deps
-        path: /go
-    commands:
-      - go build
-
   - name: release
     image: golang
     secrets: [GITHUB_TOKEN]
