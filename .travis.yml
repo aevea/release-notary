@@ -38,9 +38,9 @@ deploy:
     secure: $GITHUB_TOKEN
   file:
     # The names of the binaries to output, based on the -output template passed to gox.
-    - logshare.windows.amd64.exe
-    - logshare.darwin.amd64
-    - logshare.linux.amd64
+    - release-notary.windows.amd64.exe
+    - release-notary.darwin.amd64
+    - release-notary.linux.amd64
   on:
     # What to repository to build
     repo: Fallion/release-notary
