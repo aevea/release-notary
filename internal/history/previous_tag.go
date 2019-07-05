@@ -44,6 +44,10 @@ func PreviousTag(repo *git.Repository, currentHash plumbing.Hash) (plumbing.Hash
 		return currentHash, ErrPrevTagNotAvailable
 	}
 
+	if sortedTags[0].hash != currentHash {
+		return sortedTags[0].hash, nil
+	}
+
 	return sortedTags[1].hash, nil
 }
 
