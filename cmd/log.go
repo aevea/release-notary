@@ -3,8 +3,8 @@ package cmd
 import (
 	"log"
 
-	"github.com/Fallion/release-notary/internal/history"
-	"github.com/Fallion/release-notary/internal/text"
+	"github.com/fallion/release-notary/internal/history"
+	"github.com/fallion/release-notary/internal/text"
 	"github.com/spf13/cobra"
 	"gopkg.in/src-d/go-git.v4"
 )
