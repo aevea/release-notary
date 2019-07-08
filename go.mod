@@ -1,4 +1,4 @@
-module github.com/fallion/release-notary
+module github.com/Fallion/release-notary
 
 go 1.12
 
