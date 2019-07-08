@@ -10,10 +10,10 @@ test:
 
 # Make sure no unnecessary dependecies are present
 go-mod-tidy:
-	- go mod tidy -v
-	- git diff --exit-code
+	go mod tidy -v
+	git diff-index --quiet HEAD || echo "Go mod tidy failed. Please run it locally"
 
 # Run all tests & linters in CI
 ci:
-	- make test 
-	- make go-mod-tidy
+	make test 
+	make go-mod-tidy
