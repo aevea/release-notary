@@ -11,7 +11,7 @@ test:
 # Make sure no unnecessary dependecies are present
 go-mod-tidy:
 	go mod tidy -v
-	git diff-index --quiet HEAD || echo "Go mod tidy failed. Please run it locally"
+	git diff-index --quiet HEAD
 
 # Run all tests & linters in CI
 ci: test go-mod-tidy
