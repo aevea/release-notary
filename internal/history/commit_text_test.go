@@ -3,8 +3,6 @@ package history
 import (
 	"testing"
 
-	"io/ioutil"
-	"path/filepath"
 	"time"
 
 	"github.com/stretchr/testify/assert"
@@ -22,19 +20,6 @@ func setupRepo() *git.Repository {
 
 func createCommit(repo *git.Repository, message string) *object.Commit {
 	w, _ := repo.Worktree()
-
-	directory := "./tmp"
-
-	filename := filepath.Join(directory, "example-git-file")
-	ioErr := ioutil.WriteFile(filename, []byte("hello world!"), 0644)
-	if ioErr != nil {
-		panic(ioErr)
-	}
-
-	_, addErr := w.Add("example-git-file")
-	if addErr != nil {
-		panic(addErr)
-	}
 
 	commit, _ := w.Commit(message, &git.CommitOptions{
 		Author: &object.Signature{
