@@ -27,7 +27,7 @@ var logCmd = &cobra.Command{
 
 		currentCommit := history.CurrentCommit(repo, debug)
 
-		lastTag, _ := history.PreviousTag(repo, currentCommit)
+		lastTag, _ := history.PreviousTag(repo, currentCommit, debug)
 
 		commits, _ := history.CommitsBetween(repo, currentCommit, lastTag)
 
