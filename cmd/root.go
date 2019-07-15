@@ -17,6 +17,13 @@ var rootCmd = &cobra.Command{
 	}),
 }
 
+// Verbose is used to allow verbose/debug output for any given command
+var Verbose bool
+
+func init() {
+	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
+}
+
 // Execute just executes the rootCmd for Cobra
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {

@@ -18,9 +18,14 @@ var logCmd = &cobra.Command{
 	Short: "Prints commits between two tags",
 	Long:  "In default prints the commits between 2 tags. Can be overriden to specify exact commits.",
 	Run: func(cmd *cobra.Command, args []string) {
+		debug := false
+		if cmd.Flag("verbose").Value.String() == "true" {
+			debug = true
+		}
+
 		repo, _ := git.PlainOpen(".")
 
-		currentCommit := history.CurrentCommit(repo)
+		currentCommit := history.CurrentCommit(repo, debug)
 
 		lastTag, _ := history.PreviousTag(repo, currentCommit)
 
