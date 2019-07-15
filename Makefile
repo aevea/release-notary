@@ -6,7 +6,7 @@ build:
 
 # Standard go test
 test:
-	- go test ./... -v -race
+	go test ./... -v -race
 
 # Make sure no unnecessary dependecies are present
 go-mod-tidy:
