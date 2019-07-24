@@ -1,8 +1,8 @@
 install_deps:
-	- go mod download
+	go mod download
 
 build:
-	- go build -o build/release-notary ./
+	go build -o build/release-notary ./
 
 # Standard go test
 test:
