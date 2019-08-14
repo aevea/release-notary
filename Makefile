@@ -2,7 +2,7 @@ install_deps:
 	go mod download
 
 build:
-	go build -o build/release-notary ./
+	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/release-notary .
 
 # Standard go test
 test:
