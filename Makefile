@@ -1,7 +1,7 @@
 install_deps:
 	go mod download
 
-build:
+build/docker:
 	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/release-notary .
 
 # Standard go test
