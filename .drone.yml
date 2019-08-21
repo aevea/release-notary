@@ -6,6 +6,9 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
+      - git fetch origin
+    when:
+      event: [pull_request, tag]
 
   - name: test
     image: golang
@@ -14,6 +17,9 @@ steps:
         path: /go
     commands:
       - make ci
+    when:
+      event: [pull_request]
+    depends_on: [fetch]
 
   - name: release
     image: golang
@@ -27,6 +33,12 @@ steps:
       - curl -sL https://git.io/goreleaser | bash
     when:
       event: tag
+
+  - name: validate-commits
+    image: commitsar/commitsar:0.2.1
+    when:
+      event: [pull_request]
+    depends_on: [fetch]
 
   - name: docker
     image: plugins/docker
