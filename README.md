@@ -15,7 +15,7 @@ Currently experimental.
 Download and run: **(Substitute v0.0.2 for current version)**
 
 ```yml
-- curl -L -O https://github.com/fallion/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/commitsar-app/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf release-notary_v0.0.2_Linux_x86_64.tar.gz
 - ./release-notary log
 ```
