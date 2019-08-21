@@ -1,6 +1,6 @@
 # Release notary
 
-[![Build Status](https://cloud.drone.io/api/badges/fallion/release-notary/status.svg)](https://cloud.drone.io/fallion/release-notary)
+[![Build Status](https://cloud.drone.io/api/badges/commitsar-app/release-notary/status.svg)](https://cloud.drone.io/commitsar-app/release-notary)
 
 Release notary is a tiny language agnostic app for automatically building changelogs. In the future it will also update GitLab and GitHub release notes. It is similar to https://goreleaser.com/ (which I highly recommend for Go projects) but doesn't handle builds and artifacts, just release notes.
 
