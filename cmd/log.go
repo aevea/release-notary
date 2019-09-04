@@ -3,10 +3,9 @@ package cmd
 import (
 	"log"
 
-	"github.com/commitsar-app/release-notary/internal/history"
+	"github.com/commitsar-app/commitsar/pkg/history"
 	"github.com/commitsar-app/release-notary/internal/text"
 	"github.com/spf13/cobra"
-	"gopkg.in/src-d/go-git.v4"
 )
 
 func init() {
@@ -17,28 +16,52 @@ var logCmd = &cobra.Command{
 	Use:   "log",
 	Short: "Prints commits between two tags",
 	Long:  "In default prints the commits between 2 tags. Can be overriden to specify exact commits.",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		debug := false
 		if cmd.Flag("verbose").Value.String() == "true" {
 			debug = true
 		}
 
-		repo, _ := git.PlainOpen(".")
+		repo, err := history.OpenGit(".", debug)
 
-		currentCommit := history.CurrentCommit(repo, debug)
+		if err != nil {
+			return err
+		}
 
-		lastTag, _ := history.PreviousTag(repo, currentCommit, debug)
+		currentCommit, err := repo.CurrentCommit()
 
-		commits, _ := history.CommitsBetween(repo, currentCommit, lastTag)
+		if err != nil {
+			return err
+		}
+
+		lastTag, err := repo.PreviousTag(currentCommit.Hash)
+
+		if err != nil {
+			return err
+		}
+
+		commits, err := repo.CommitsBetween(currentCommit.Hash, lastTag)
+
+		if err != nil {
+			return err
+		}
 
 		var commitMessages []string
 
 		for i := 0; i < len(commits); i++ {
+			commit, err := repo.Commit(commits[i])
+
+			if err != nil {
+				return err
+			}
+
 			commitMessages = append(commitMessages,
-				text.TrimMessage(history.CommitMessage(repo, commits[i])),
+				text.TrimMessage(commit.Message),
 			)
 		}
 
 		log.Println(text.BuildHistory(commitMessages))
+
+		return nil
 	},
 }
