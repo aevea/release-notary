@@ -4,7 +4,11 @@
 
 Release notary is a tiny language agnostic app for automatically building changelogs. In the future it will also update GitLab and GitHub release notes. It is similar to https://goreleaser.com/ (which I highly recommend for Go projects) but doesn't handle builds and artifacts, just release notes.
 
-Currently experimental.
+Heavily inspired by https://github.com/graphql/graphql-js/releases but usable as a standalone app.
+
+Expected output is [HERE](./expected-output.md)
+
+:warning: **Currently experimental.** :warning:
 
 ### Table of contents
 
