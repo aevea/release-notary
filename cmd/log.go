@@ -48,15 +48,15 @@ var logCmd = &cobra.Command{
 
 		var commitMessages []string
 
-		for i := 0; i < len(commits); i++ {
-			commit, err := repo.Commit(commits[i])
+		for _, commit := range commits {
+			commitObject, err := repo.Commit(commit)
 
 			if err != nil {
 				return err
 			}
 
 			commitMessages = append(commitMessages,
-				text.TrimMessage(commit.Message),
+				text.TrimMessage(commitObject.Message),
 			)
 		}
 
