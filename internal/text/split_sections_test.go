@@ -7,13 +7,13 @@ import (
 )
 
 func TestSplitSections(t *testing.T) {
-	dataset := []CategorisedCommit{
-		CategorisedCommit{Category: "chore", Scope: "", Heading: "testing"},
-		CategorisedCommit{Category: "feat", Scope: "ci", Heading: "ci test"},
-		CategorisedCommit{Category: "other", Scope: "", Heading: "merge master in something"},
-		CategorisedCommit{Category: "bs", Scope: "", Heading: "random"},
-		CategorisedCommit{Category: "improvement", Scope: "", Heading: "this should end up in chores"},
-		CategorisedCommit{Category: "bug", Scope: "", Heading: "huge bug"},
+	dataset := []Commit{
+		Commit{Category: "chore", Scope: "", Heading: "testing"},
+		Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
+		Commit{Category: "other", Scope: "", Heading: "merge master in something"},
+		Commit{Category: "bs", Scope: "", Heading: "random"},
+		Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"},
+		Commit{Category: "bug", Scope: "", Heading: "huge bug"},
 	}
 
 	expected := Sections{
