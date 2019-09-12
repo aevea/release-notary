@@ -9,9 +9,10 @@ import (
 func TestParseCommitMessage(t *testing.T) {
 
 	tests := map[string]Commit{
-		"chore: testing":            Commit{Category: "chore", Scope: "", Heading: "testing"},
-		"feat(ci): ci test":         Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
-		"merge master in something": Commit{Category: "other", Scope: "", Heading: "merge master in something"},
+		"chore: testing\n":                  Commit{Category: "chore", Scope: "", Heading: "testing"},
+		"feat(ci): ci test\n":               Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
+		"merge master in something\n":       Commit{Category: "other", Scope: "", Heading: "merge master in something\n"},
+		"chore: test\n something more here": Commit{Category: "chore", Scope: "", Heading: "test"},
 	}
 
 	for test, expected := range tests {
