@@ -46,7 +46,7 @@ var logCmd = &cobra.Command{
 			return err
 		}
 
-		var commitMessages []string
+		var parsedCommits []text.Commit
 
 		for _, commit := range commits {
 			commitObject, err := repo.Commit(commit)
@@ -55,12 +55,12 @@ var logCmd = &cobra.Command{
 				return err
 			}
 
-			commitMessages = append(commitMessages,
-				text.TrimMessage(commitObject.Message),
+			parsedCommits = append(parsedCommits,
+				text.ParseCommitMessage(commitObject.Message),
 			)
 		}
 
-		log.Println(text.BuildHistory(commitMessages))
+		log.Println(text.BuildHistory(parsedCommits))
 
 		return nil
 	},
