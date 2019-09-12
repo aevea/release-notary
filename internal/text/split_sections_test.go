@@ -23,7 +23,7 @@ func TestSplitSections(t *testing.T) {
 		Others:   []string{"merge master in something", "random"},
 	}
 
-	sections := splitSections(dataset)
+	sections := SplitSections(dataset)
 
 	assert.Equal(t, expected.Features, sections.Features)
 	assert.Equal(t, expected.Chores, sections.Chores)
