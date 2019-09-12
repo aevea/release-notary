@@ -8,8 +8,8 @@ type Sections struct {
 	Others   []string
 }
 
-// splitSections accepts categorised commits and further organises them into separate sections for release notes
-func splitSections(categorisedCommits []Commit) Sections {
+// SplitSections accepts categorised commits and further organises them into separate sections for release notes
+func SplitSections(categorisedCommits []Commit) Sections {
 	categoryMappings := map[string]string{
 		"feat":        "feat",
 		"chore":       "chore",
