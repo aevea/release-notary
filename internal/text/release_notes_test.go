@@ -7,7 +7,7 @@ import (
 )
 
 func TestReleaseNotes(t *testing.T) {
-	expected := "## Features :rocket:\n\n- ci test\n\n## Bug fixes :bug:\n\n- huge bug\n\n## Chores and Improvements :wrench:\n\n- testing\n- this should end up in chores\n\n## Other :package:\n\n- merge master in something\n- random\n\n"
+	expected := "\n\n## Features :rocket:\n\n- ci test\n\n## Bug fixes :bug:\n\n- huge bug\n\n## Chores and Improvements :wrench:\n\n- testing\n- this should end up in chores\n\n## Other :package:\n\n- merge master in something\n- random\n\n"
 
 	sections := Sections{
 		Features: []string{"ci test"},
