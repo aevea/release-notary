@@ -20,3 +20,15 @@ func TestReleaseNotes(t *testing.T) {
 
 	assert.Equal(t, expected, releaseNotes)
 }
+
+func TestReleaseNotesWithMissingSections(t *testing.T) {
+	expected := "\n\n## Features :rocket:\n\n- ci test\n\n"
+
+	sections := Sections{
+		Features: []string{"ci test"},
+	}
+
+	releaseNotes := ReleaseNotes(sections)
+
+	assert.Equal(t, expected, releaseNotes)
+}
