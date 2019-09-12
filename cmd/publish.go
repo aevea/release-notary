@@ -70,9 +70,10 @@ var publishCmd = &cobra.Command{
 			split := strings.Split(viper.GetString("GITHUB_REPOSITORY"), "/")
 
 			options := releaser.Options{
-				Token: viper.GetString("GITHUB_TOKEN"),
-				Owner: split[0],
-				Repo:  split[1],
+				Token:    viper.GetString("GITHUB_TOKEN"),
+				Owner:    split[0],
+				Repo:     split[1],
+				Provider: "github",
 			}
 			releaseService = releaser.CreateReleaser(options)
 		}

@@ -50,6 +50,17 @@ steps:
       password:
         from_secret: docker_password
 
+  - name: release-notes
+    image: golang
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+      GITHUB_REPOSITORY: commitsar-app/release-notary
+    commands:
+      - go run main.go publish
+    when:
+      event: [tag]
+
 volumes:
   - name: deps
     temp: {}

@@ -5,14 +5,24 @@ import "strings"
 // ReleaseNotes generates the output mentioned in the expected-output.md
 func ReleaseNotes(sections Sections) string {
 	builder := strings.Builder{}
+	// Extra lines at the start to make sure formatting starts correctly
+	builder.WriteString("\n\n")
 
-	builder.WriteString(buildSection("features", sections.Features))
+	if len(sections.Features) > 0 {
+		builder.WriteString(buildSection("features", sections.Features))
+	}
 
-	builder.WriteString(buildSection("bugs", sections.Bugs))
+	if len(sections.Bugs) > 0 {
+		builder.WriteString(buildSection("bugs", sections.Bugs))
+	}
 
-	builder.WriteString(buildSection("chores", sections.Chores))
+	if len(sections.Chores) > 0 {
+		builder.WriteString(buildSection("chores", sections.Chores))
+	}
 
-	builder.WriteString(buildSection("others", sections.Others))
+	if len(sections.Others) > 0 {
+		builder.WriteString(buildSection("others", sections.Others))
+	}
 
 	return builder.String()
 }
