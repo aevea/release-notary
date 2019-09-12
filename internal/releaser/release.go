@@ -11,10 +11,12 @@ func (r *Releaser) Release(releaseNotes string) error {
 	}
 
 	builder := strings.Builder{}
-	builder.WriteString(latestRelease)
+	builder.WriteString(latestRelease.Message)
 	builder.WriteString(releaseNotes)
 
-	err = r.service.Publish(builder.String(), "")
+	latestRelease.Message = builder.String()
+
+	err = r.service.Publish(latestRelease)
 
 	if err != nil {
 		return err
