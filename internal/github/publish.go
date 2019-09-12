@@ -11,7 +11,7 @@ import (
 
 // Publish publishes a Release https://developer.github.com/v3/repos/releases/#edit-a-release
 func (g *Github) Publish(release *release.Release) error {
-	url := fmt.Sprintf("https://api.github.com/repos/%v/%v/releases/latest", g.owner, g.repo)
+	url := fmt.Sprintf("https://api.github.com/repos/%v/%v/releases/%v", g.owner, g.repo, release.ID)
 
 	jsonBody, err := json.Marshal(githubRelease{ID: release.ID, Tag: release.Tag, Name: release.Name, Message: release.Message})
 
