@@ -14,12 +14,13 @@ func TestSplitSections(t *testing.T) {
 		Commit{Category: "bs", Scope: "", Heading: "random"},
 		Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"},
 		Commit{Category: "bug", Scope: "", Heading: "huge bug"},
+		Commit{Category: "fix", Scope: "", Heading: "bug fix"},
 	}
 
 	expected := Sections{
 		Features: []string{"ci test"},
 		Chores:   []string{"testing", "this should end up in chores"},
-		Bugs:     []string{"huge bug"},
+		Bugs:     []string{"huge bug", "bug fix"},
 		Others:   []string{"merge master in something", "random"},
 	}
 
