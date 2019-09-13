@@ -16,6 +16,7 @@ func SplitSections(categorisedCommits []Commit) Sections {
 		"improvement": "chore",
 		"bug":         "bug",
 		"other":       "other",
+		"fix": 		   "bug",
 	}
 
 	var features []string
