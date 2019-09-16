@@ -9,15 +9,6 @@ var (
 	expectedFormatRegex = regexp.MustCompile(`^(?P<type>\S+?)(?P<scope>\(\S+\)?)?!?:\s(?P<message>.+)\n`)
 )
 
-// Commit is a parsed commit that contains information about category, scope and heading
-type Commit struct {
-	Category string
-	Heading  string
-	Body     string
-	Scope    string
-	Hash     [20]byte
-}
-
 // ParseCommitMessage creates a slice of Commits that contain information about category and scope parsed from commit message
 func ParseCommitMessage(commitMessage string) Commit {
 	match := expectedFormatRegex.FindStringSubmatch(commitMessage)
