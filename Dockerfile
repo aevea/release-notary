@@ -21,4 +21,4 @@ COPY --from=builder /app/build/release-notary ./release-notary
 
 RUN ln -s $PWD/release-notary /usr/local/bin
 
-CMD [ "release-notary", "log" ]
+CMD [ "release-notary", "publish" ]
