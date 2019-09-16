@@ -2,10 +2,10 @@ package text
 
 // Sections are sections used by release notes. Please check expected-output.md
 type Sections struct {
-	Features []string
-	Chores   []string
-	Bugs     []string
-	Others   []string
+	Features []Commit
+	Chores   []Commit
+	Bugs     []Commit
+	Others   []Commit
 }
 
 // SplitSections accepts categorised commits and further organises them into separate sections for release notes
@@ -19,26 +19,26 @@ func SplitSections(categorisedCommits []Commit) Sections {
 		"fix": 		   "bug",
 	}
 
-	var features []string
-	var chores []string
-	var bugs []string
-	var other []string
+	var features []Commit
+	var chores []Commit
+	var bugs []Commit
+	var other []Commit
 
 	for _, commit := range categorisedCommits {
 		if categoryMappings[commit.Category] == "feat" {
-			features = append(features, commit.Heading)
+			features = append(features, commit)
 		}
 
 		if categoryMappings[commit.Category] == "bug" {
-			bugs = append(bugs, commit.Heading)
+			bugs = append(bugs, commit)
 		}
 
 		if categoryMappings[commit.Category] == "chore" {
-			chores = append(chores, commit.Heading)
+			chores = append(chores, commit)
 		}
 
 		if categoryMappings[commit.Category] == "other" || categoryMappings[commit.Category] == "" {
-			other = append(other, commit.Heading)
+			other = append(other, commit)
 		}
 	}
 
