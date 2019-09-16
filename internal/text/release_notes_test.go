@@ -7,7 +7,7 @@ import (
 )
 
 func TestReleaseNotes(t *testing.T) {
-	expected := "\n\n## Features :rocket:\n\n- ci test\n\n## Bug fixes :bug:\n\n- huge bug\n\n## Chores and Improvements :wrench:\n\n- testing\n- this should end up in chores\n\n## Other :package:\n\n- merge master in something\n- random\n\n"
+	expected := "\n\n## Features :rocket:\n\n- 0000000 ci test\n\n## Bug fixes :bug:\n\n- 0000000 huge bug\n\n## Chores and Improvements :wrench:\n\n- 0000000 testing\n- 0000000 this should end up in chores\n\n## Other :package:\n\n- 0000000 merge master in something\n- 0000000 random\n\n"
 
 	sections := Sections{
 		Features: []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
@@ -22,7 +22,7 @@ func TestReleaseNotes(t *testing.T) {
 }
 
 func TestReleaseNotesWithMissingSections(t *testing.T) {
-	expected := "\n\n## Features :rocket:\n\n- ci test\n\n"
+	expected := "\n\n## Features :rocket:\n\n- 0000000 ci test\n\n"
 
 	sections := Sections{
 		Features: []Commit{Commit{Heading: "ci test"}},

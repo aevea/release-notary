@@ -59,7 +59,7 @@ var publishCmd = &cobra.Command{
 
 			parsedCommit := text.ParseCommitMessage(commitObject.Message)
 
-			parsedCommit.Hash = commitObject.Hash
+			parsedCommit.Hash = text.Hash(commitObject.Hash)
 
 			parsedCommits = append(parsedCommits,
 				parsedCommit,

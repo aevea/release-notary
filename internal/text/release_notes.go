@@ -71,6 +71,9 @@ func buildCommitLog(commits []Commit) string {
 
 	for _, commit := range commits {
 		builder.WriteString("- ")
+		// Short version of hash usable on Github
+		builder.WriteString(commit.Hash.String()[:7])
+		builder.WriteString(" ")
 		builder.WriteString(commit.Heading)
 		builder.WriteString("\n")
 	}
