@@ -18,10 +18,10 @@ func TestSplitSections(t *testing.T) {
 	}
 
 	expected := Sections{
-		Features: []string{"ci test"},
-		Chores:   []string{"testing", "this should end up in chores"},
-		Bugs:     []string{"huge bug", "bug fix"},
-		Others:   []string{"merge master in something", "random"},
+		Features: []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		Chores:   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		Bugs:     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}, Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
+		Others:   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	sections := SplitSections(dataset)

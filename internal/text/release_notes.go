@@ -27,7 +27,7 @@ func ReleaseNotes(sections Sections) string {
 	return builder.String()
 }
 
-func buildSection(category string, commits []string) string {
+func buildSection(category string, commits []Commit) string {
 	builder := strings.Builder{}
 
 	builder.WriteString(buildHeading(category))
@@ -66,12 +66,12 @@ func buildHeading(category string) string {
 	return builder.String()
 }
 
-func buildCommitLog(commits []string) string {
+func buildCommitLog(commits []Commit) string {
 	builder := strings.Builder{}
 
 	for _, commit := range commits {
 		builder.WriteString("- ")
-		builder.WriteString(commit)
+		builder.WriteString(commit.Heading)
 		builder.WriteString("\n")
 	}
 
