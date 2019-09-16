@@ -20,4 +20,4 @@ Description of release
 
 ## Other :package:
 
-- [[commitId](linktocommit)]
+- [[commitId](linktocommit)] some other commit
