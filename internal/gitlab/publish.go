@@ -13,7 +13,7 @@ func (g *Gitlab) Publish(release *release.Release) error {
 	// By default we are creating a new release
 	method := "POST"
 
-	existingRelease, err := g.LatestRelease()
+	existingRelease, err := g.ExistingRelease()
 
 	if err != nil && err != errReleaseNotFound {
 		return err
