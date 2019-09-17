@@ -11,9 +11,9 @@ import (
 
 // Publish publishes a Release https://developer.github.com/v3/repos/releases/#edit-a-release
 func (g *Gitlab) Publish(release *release.Release) error {
-	url := fmt.Sprintf("%v/projects/%v/releases/%v", g.apiURL, g.projectID, g.tagName)
+	url := fmt.Sprintf("%v/projects/%v/repository/tags/%v/release", g.apiURL, g.projectID, g.tagName)
 
-	jsonBody, err := json.Marshal(gitlabRelease{Name: release.Name, Message: release.Message})
+	jsonBody, err := json.Marshal(gitlabRelease{Message: release.Message})
 
 	if err != nil {
 		return err
