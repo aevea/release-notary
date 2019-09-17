@@ -5,18 +5,23 @@ import (
 	"fmt"
 
 	"github.com/commitsar-app/release-notary/internal/release"
-	jsoniter "github.com/json-iterator/go"
 )
 
-var json = jsoniter.ConfigCompatibleWithStandardLibrary
+var (
+	errReleaseNotFound = errors.New("release not found")
+)
 
-// LatestRelease gets the current tag. https://docs.gitlab.com/ee/api/releases/#get-a-release-by-a-tag-name Gitlab does not have support for latest release in API.
-func (g *Gitlab) LatestRelease() (*release.Release, error) {
-	url := fmt.Sprintf("%v/projects/%v/repository/tags/%v", g.apiURL, g.projectID, g.tagName)
+// ExistingRelease gets the release on current tag. https://docs.gitlab.com/ee/api/releases/#get-a-release-by-a-tag-name Gitlab does not have support for latest release in API.
+func (g *Gitlab) ExistingRelease() (*release.Release, error) {
+	url := fmt.Sprintf("%v/projects/%v/releases/%v", g.apiURL, g.projectID, g.tagName)
 	response, err := g.client.Get(url)
 
 	if err != nil {
 		return nil, err
+	}
+
+	if response.StatusCode == 404 {
+		return nil, errReleaseNotFound
 	}
 
 	if response.StatusCode != 200 {
