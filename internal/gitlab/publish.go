@@ -19,7 +19,7 @@ func (g *Gitlab) Publish(release *release.Release) error {
 		return err
 	}
 
-	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonBody))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonBody))
 
 	if err != nil {
 		return err
