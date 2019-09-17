@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/commitsar-app/commitsar/pkg/history"
@@ -79,7 +80,33 @@ var publishCmd = &cobra.Command{
 				Repo:     split[1],
 				Provider: "github",
 			}
-			releaseService = releaser.CreateReleaser(options)
+			service, err := releaser.CreateReleaser(options)
+			if err != nil {
+				return err
+			}
+
+			releaseService = service
+		}
+
+		if viper.IsSet("GITLAB_TOKEN") {
+			if !viper.IsSet("CI_COMMIT_TAG") {
+				fmt.Print("Release Notary is not running on a tag or CI_COMMIT_TAG is not set")
+				return nil
+			}
+
+			options := releaser.Options{
+				Token:    viper.GetString("GITHUB_TOKEN"),
+				APIURL:   viper.GetString("CI_API_V4_URL"),
+				TagName:  viper.GetString("CI_COMMIT_TAG"),
+				Provider: "gitlab",
+			}
+
+			service, err := releaser.CreateReleaser(options)
+			if err != nil {
+				return err
+			}
+
+			releaseService = service
 		}
 
 		sections := text.SplitSections(parsedCommits)

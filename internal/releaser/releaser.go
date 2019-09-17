@@ -1,7 +1,10 @@
 package releaser
 
 import (
+	"fmt"
+
 	"github.com/commitsar-app/release-notary/internal/github"
+	"github.com/commitsar-app/release-notary/internal/gitlab"
 	"github.com/commitsar-app/release-notary/internal/release"
 )
 
@@ -23,14 +26,25 @@ type Options struct {
 	Token    string
 	Owner    string
 	Repo     string
+	// used for setting gitlab api url
+	APIURL string
+	// used by gitlab
+	TagName string
+	// used by Gitlab
+	ProjectID int
 }
 
 // CreateReleaser initializes an instance of Releaser
-func CreateReleaser(options Options) *Releaser {
+func CreateReleaser(options Options) (*Releaser, error) {
 	if options.Provider == "github" {
 		githubService := github.CreateGithubService(options.Token, options.Owner, options.Repo)
-		return &Releaser{service: githubService}
+		return &Releaser{service: githubService}, nil
 	}
 
-	return &Releaser{}
+	if options.Provider == "gitlab" {
+		gitlabService, err := gitlab.CreateGitlabService(options.ProjectID, options.APIURL, options.TagName, options.Token)
+		return &Releaser{service: gitlabService}, err
+	}
+
+	return nil, fmt.Errorf("provider %v not found", options.Provider)
 }
