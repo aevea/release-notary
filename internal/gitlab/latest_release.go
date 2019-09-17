@@ -1,7 +1,6 @@
 package gitlab
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/commitsar-app/release-notary/internal/release"
@@ -20,7 +19,7 @@ func (g *Gitlab) LatestRelease() (*release.Release, error) {
 	}
 
 	if response.StatusCode != 200 {
-		return nil, errors.New("api returned non 200 response")
+		return nil, fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
 	}
 
 	defer response.Body.Close()

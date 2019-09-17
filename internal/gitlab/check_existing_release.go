@@ -25,7 +25,7 @@ func (g *Gitlab) ExistingRelease() (*release.Release, error) {
 	}
 
 	if response.StatusCode != 200 {
-		return nil, errors.New("api returned non 200 response")
+		return nil, fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
 	}
 
 	defer response.Body.Close()

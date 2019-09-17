@@ -2,7 +2,6 @@ package gitlab
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -48,7 +47,7 @@ func (g *Gitlab) Publish(release *release.Release) error {
 	}
 
 	if response.StatusCode != 200 {
-		return errors.New("Non 200 code received")
+		return fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
 	}
 
 	return nil
