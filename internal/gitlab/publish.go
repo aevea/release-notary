@@ -47,7 +47,7 @@ func (g *Gitlab) Publish(release *release.Release) error {
 	}
 
 	if response.StatusCode != 200 {
-		return fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
+		return fmt.Errorf("%v %v returned %v code with error: %v", method, url, response.StatusCode, response.Status)
 	}
 
 	return nil
