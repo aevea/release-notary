@@ -95,10 +95,11 @@ var publishCmd = &cobra.Command{
 			}
 
 			options := releaser.Options{
-				Token:    viper.GetString("GITHUB_TOKEN"),
-				APIURL:   viper.GetString("CI_API_V4_URL"),
-				TagName:  viper.GetString("CI_COMMIT_TAG"),
-				Provider: "gitlab",
+				Token:     viper.GetString("GITHUB_TOKEN"),
+				APIURL:    viper.GetString("CI_API_V4_URL"),
+				TagName:   viper.GetString("CI_COMMIT_TAG"),
+				ProjectID: viper.GetInt("CI_PROJECT_ID"),
+				Provider:  "gitlab",
 			}
 
 			service, err := releaser.CreateReleaser(options)
