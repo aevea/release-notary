@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -108,6 +109,10 @@ var publishCmd = &cobra.Command{
 			}
 
 			releaseService = service
+		}
+
+		if releaseService == nil {
+			return errors.New("Missing release service, please consult documentation on required env vars")
 		}
 
 		sections := text.SplitSections(parsedCommits)
