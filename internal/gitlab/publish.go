@@ -8,7 +8,7 @@ import (
 	"github.com/commitsar-app/release-notary/internal/release"
 )
 
-// Publish publishes a Release https://developer.github.com/v3/repos/releases/#edit-a-release
+// Publish publishes a Release https://docs.gitlab.com/ee/api/tags.html#create-a-new-release
 func (g *Gitlab) Publish(release *release.Release) error {
 	// By default we are creating a new release
 	method := "POST"

@@ -24,13 +24,20 @@ func (g *Gitlab) LatestRelease() (*release.Release, error) {
 
 	defer response.Body.Close()
 
-	var glRelease gitlabRelease
+	var glTag gitlabTag
 
-	err = json.NewDecoder(response.Body).Decode(&glRelease)
+	err = json.NewDecoder(response.Body).Decode(&glTag)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &release.Release{ID: g.projectID, Tag: g.tagName, Name: glRelease.Name, Message: glRelease.Message}, nil
+	message := ""
+
+	// If a release already exists it's hidden in this field
+	if glTag.Release.Message != "" {
+		message = glTag.Release.Message
+	}
+
+	return &release.Release{ID: g.projectID, Tag: g.tagName, Name: glTag.Name, Message: message}, nil
 }
