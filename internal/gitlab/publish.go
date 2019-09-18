@@ -40,7 +40,8 @@ func (g *Gitlab) Publish(release *release.Release) error {
 		return err
 	}
 
-	if response.StatusCode != 200 {
+	// 201 is used when a new release is attached to an existing tag
+	if response.StatusCode != 200 && response.StatusCode != 201 {
 		return fmt.Errorf("%v %v returned %v code with error: %v", method, url, response.StatusCode, response.Status)
 	}
 
