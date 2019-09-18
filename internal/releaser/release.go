@@ -14,7 +14,7 @@ func (r *Releaser) Release(releaseNotes string) error {
 	builder.WriteString(latestRelease.Message)
 	builder.WriteString(releaseNotes)
 
-	latestRelease.Message = builder.String()
+	latestRelease.ReleaseNotes = builder.String()
 
 	err = r.service.Publish(latestRelease)
 

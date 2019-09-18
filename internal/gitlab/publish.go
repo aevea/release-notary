@@ -13,20 +13,14 @@ func (g *Gitlab) Publish(release *release.Release) error {
 	// By default we are creating a new release
 	method := "POST"
 
-	existingRelease, err := g.ExistingRelease()
-
-	if err != nil && err != errReleaseNotFound {
-		return err
-	}
-
 	// In case release already exists we need to update instead of creating
-	if existingRelease.Message != "" {
+	if release.Message != "" {
 		method = "PUT"
 	}
 
 	url := fmt.Sprintf("%v/projects/%v/repository/tags/%v/release", g.apiURL, g.projectID, g.tagName)
 
-	jsonBody, err := json.Marshal(gitlabRelease{Message: release.Message})
+	jsonBody, err := json.Marshal(gitlabRelease{Message: release.ReleaseNotes})
 
 	if err != nil {
 		return err

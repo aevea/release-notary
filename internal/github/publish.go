@@ -13,7 +13,7 @@ import (
 func (g *Github) Publish(release *release.Release) error {
 	url := fmt.Sprintf("https://api.github.com/repos/%v/%v/releases/%v", g.owner, g.repo, release.ID)
 
-	jsonBody, err := json.Marshal(githubRelease{ID: release.ID, Tag: release.Tag, Name: release.Name, Message: release.Message})
+	jsonBody, err := json.Marshal(githubRelease{ID: release.ID, Tag: release.Tag, Name: release.Name, Message: release.ReleaseNotes})
 
 	if err != nil {
 		return err
