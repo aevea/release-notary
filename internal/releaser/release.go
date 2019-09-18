@@ -1,6 +1,9 @@
 package releaser
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // Release pulls latest tag and its text, then it appends passed release notes
 func (r *Releaser) Release(releaseNotes string) error {
@@ -8,6 +11,11 @@ func (r *Releaser) Release(releaseNotes string) error {
 
 	if err != nil {
 		return err
+	}
+
+	if strings.Contains(latestRelease.Message, releaseNotes) {
+		fmt.Print("\nRelease already contains these release notes\n")
+		return nil
 	}
 
 	builder := strings.Builder{}
