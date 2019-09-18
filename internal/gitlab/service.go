@@ -18,6 +18,16 @@ type gitlabRelease struct {
 	Message string `json:"description"`
 }
 
+// tagRelease is metadata used by gitlab in a tag https://docs.gitlab.com/ee/api/tags.html#get-a-single-repository-tag
+type tagRelease struct {
+	Message string `json:"description"`
+}
+
+type gitlabTag struct {
+	Name    string     `json:"name"`
+	Release tagRelease `json:"release"`
+}
+
 // CreateGitlabService creates an instance of the Gitlab service struct
 func CreateGitlabService(projectID int, apiURL, tagName, token string) (*Gitlab, error) {
 	if projectID == 0 {
