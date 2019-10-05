@@ -33,7 +33,7 @@ func (g *Github) Publish(release *release.Release) error {
 	}
 
 	if response.StatusCode != 200 {
-		return nil, fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
+		return fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
 	}
 
 	return nil
