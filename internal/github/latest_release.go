@@ -1,11 +1,10 @@
 package github
 
 import (
-	"errors"
 	"fmt"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/commitsar-app/release-notary/internal/release"
+	jsoniter "github.com/json-iterator/go"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -20,7 +19,7 @@ func (g *Github) LatestRelease() (*release.Release, error) {
 	}
 
 	if response.StatusCode != 200 {
-		return nil, errors.New("hmm")
+		return nil, fmt.Errorf("%v returned %v code with error: %v", url, response.StatusCode, response.Status)
 	}
 
 	defer response.Body.Close()
@@ -32,7 +31,6 @@ func (g *Github) LatestRelease() (*release.Release, error) {
 	if err != nil {
 		return nil, err
 	}
-
 
 	return &release.Release{ID: ghRelease.ID, Tag: ghRelease.Tag, Name: ghRelease.Name, Message: ghRelease.Message}, nil
 }
