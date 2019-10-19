@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Commitsar Action
-        uses: commitsar-app/commitsar@v0.6.6
+        uses: docker://commitsar/commitsar:0.8.0
