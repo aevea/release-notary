@@ -40,7 +40,7 @@ var publishCmd = &cobra.Command{
 
 		lastTag, err := repo.PreviousTag(currentCommit.Hash)
 
-		if err != nil {
+		if err != nil && err != history.ErrPrevTagNotAvailable {
 			return err
 		}
 
