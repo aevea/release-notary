@@ -3,7 +3,7 @@ package cmd
 import (
 	"log"
 
-	"github.com/commitsar-app/commitsar/pkg/history"
+	history "github.com/commitsar-app/git/pkg"
 	"github.com/commitsar-app/release-notary/internal/text"
 	"github.com/spf13/cobra"
 )

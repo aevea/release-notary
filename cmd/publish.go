@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/commitsar-app/commitsar/pkg/history"
+	"github.com/commitsar-app/git/pkg"
 	"github.com/commitsar-app/release-notary/internal/releaser"
 	"github.com/commitsar-app/release-notary/internal/text"
 	"github.com/spf13/cobra"
