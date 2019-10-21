@@ -20,7 +20,7 @@ func getCommits(repo *history.Git) ([]plumbing.Hash, error) {
 
 	// If previous tag is not available, provide empty hash so that all commits are iterated.
 	if err == history.ErrPrevTagNotAvailable {
-		lastTag = plumbing.Hash{}
+		lastTag = &history.Tag{}
 	}
 
 	currentTag, err := repo.CurrentTag()
@@ -32,7 +32,7 @@ func getCommits(repo *history.Git) ([]plumbing.Hash, error) {
 		return nil, err
 	}
 
-	commits, err := repo.BranchDiffCommits(currentTag.Name, lastTag.String())
+	commits, err := repo.BranchDiffCommits(currentTag.Name, lastTag.Name)
 
 	if err != nil {
 		return nil, err
