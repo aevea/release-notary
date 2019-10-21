@@ -10,7 +10,6 @@ import (
 	"github.com/commitsar-app/release-notary/internal/text"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
 func init() {
@@ -33,24 +32,7 @@ var publishCmd = &cobra.Command{
 			return err
 		}
 
-		currentCommit, err := repo.CurrentCommit()
-
-		if err != nil {
-			return err
-		}
-
-		lastTag, err := repo.PreviousTag(currentCommit.Hash)
-
-		if err != nil && err != history.ErrPrevTagNotAvailable {
-			return err
-		}
-
-		// If previous tag is not available, provide empty hash so that all commits are iterated.
-		if err == history.ErrPrevTagNotAvailable {
-			lastTag = plumbing.Hash{}
-		}
-
-		commits, err := repo.CommitsBetween(currentCommit.Hash, lastTag)
+		commits, err := getCommits(repo)
 
 		if err != nil {
 			return err
