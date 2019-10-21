@@ -40,7 +40,7 @@ var logCmd = &cobra.Command{
 			return err
 		}
 
-		commits, err := repo.CommitsBetween(currentCommit.Hash, lastTag)
+		commits, err := repo.CommitsBetween(currentCommit.Hash, lastTag.Hash)
 
 		if err != nil {
 			return err
