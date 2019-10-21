@@ -1,2 +1,4 @@
 build
 dist
+testdata/detached_tag
+testdata/single_branch_tags
