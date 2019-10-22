@@ -1,23 +1,20 @@
-# Release {version}
 
-Description of release
-
-## :warning: BREAKING CHANGES :warning:
-
-- [[commitId](linkcommit)] BREAKING CHANGE: text of breaking change
 
 ## Features :rocket:
 
-- [[commitId](linktocommit)] Brand new feature
+- 0000000 ci test
 
 ## Bug fixes :bug:
 
-- [[commitId](linktocommit)] Bug fix
+- 0000000 huge bug
 
 ## Chores and Improvements :wrench:
 
-- [[commitId](linktocommit)] documentation improvement
+- 0000000 testing
+- 0000000 this should end up in chores
 
 ## Other :package:
 
-- [[commitId](linktocommit)] some other commit
+- 0000000 merge master in something
+- 0000000 random
+
