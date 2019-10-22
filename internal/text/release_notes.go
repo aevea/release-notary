@@ -1,6 +1,9 @@
 package text
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // ReleaseNotes generates the output mentioned in the expected-output.md
 func ReleaseNotes(sections map[string][]Commit) string {
@@ -41,25 +44,13 @@ func buildHeading(category string) string {
 
 	builder.WriteString("## ")
 
-	if category == "features" {
-		builder.WriteString("Features ")
-		builder.WriteString(EmoticonFeature)
-	}
+	heading := fmt.Sprintf("%v ", sectionHeadings[category].title)
 
-	if category == "bugs" {
-		builder.WriteString("Bug fixes ")
-		builder.WriteString(EmoticonBug)
-	}
+	builder.WriteString(heading)
 
-	if category == "chores" {
-		builder.WriteString("Chores and Improvements ")
-		builder.WriteString(EmoticonChores)
-	}
+	icon := fmt.Sprintf(":%v:", sectionHeadings[category].icon)
 
-	if category == "others" {
-		builder.WriteString("Other ")
-		builder.WriteString(EmoticonOthers)
-	}
+	builder.WriteString(icon)
 
 	builder.WriteString("\n\n")
 
