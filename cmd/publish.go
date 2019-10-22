@@ -12,7 +12,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+var simpleOutput bool
+
 func init() {
+	publishCmd.PersistentFlags().BoolVar(&simpleOutput, "simple", false, "use simplified output")
 	rootCmd.AddCommand(publishCmd)
 }
 
@@ -105,7 +108,9 @@ var publishCmd = &cobra.Command{
 
 		sections := text.SplitSections(parsedCommits)
 
-		releaseNotes := text.ReleaseNotes{}
+		releaseNotes := text.ReleaseNotes{
+			Simple: simpleOutput,
+		}
 
 		err = releaseService.Release(releaseNotes.Generate(sections))
 
