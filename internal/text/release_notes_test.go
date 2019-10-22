@@ -19,11 +19,11 @@ func TestReleaseNotes(t *testing.T) {
 
 	expected := string(b)
 
-	sections := Sections{
-		Features: []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		Chores:   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
-		Bugs:     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}},
-		Others:   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
+	sections := map[string][]Commit{
+		"features": []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"bugs":     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}},
+		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	releaseNotes := ReleaseNotes(sections)
@@ -34,8 +34,8 @@ func TestReleaseNotes(t *testing.T) {
 func TestReleaseNotesWithMissingSections(t *testing.T) {
 	expected := "\n\n## Features :rocket:\n\n- 0000000 ci test\n\n"
 
-	sections := Sections{
-		Features: []Commit{Commit{Heading: "ci test"}},
+	sections := map[string][]Commit{
+		"features": []Commit{Commit{Heading: "ci test"}},
 	}
 
 	releaseNotes := ReleaseNotes(sections)

@@ -17,17 +17,17 @@ func TestSplitSections(t *testing.T) {
 		Commit{Category: "fix", Scope: "", Heading: "bug fix"},
 	}
 
-	expected := Sections{
-		Features: []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		Chores:   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
-		Bugs:     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}, Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
-		Others:   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
+	expected := map[string][]Commit{
+		"features": []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"bugs":     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}, Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
+		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	sections := SplitSections(dataset)
 
-	assert.Equal(t, expected.Features, sections.Features)
-	assert.Equal(t, expected.Chores, sections.Chores)
-	assert.Equal(t, expected.Bugs, sections.Bugs)
-	assert.Equal(t, expected.Others, sections.Others)
+	assert.Equal(t, expected["features"], sections["features"])
+	assert.Equal(t, expected["chores"], sections["chores"])
+	assert.Equal(t, expected["bugs"], sections["bugs"])
+	assert.Equal(t, expected["others"], sections["others"])
 }

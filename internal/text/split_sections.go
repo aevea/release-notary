@@ -1,51 +1,31 @@
 package text
 
-// Sections are sections used by release notes. Please check expected-output.md
-type Sections struct {
-	Features []Commit
-	Chores   []Commit
-	Bugs     []Commit
-	Others   []Commit
-}
+import "log"
 
 // SplitSections accepts categorised commits and further organises them into separate sections for release notes
-func SplitSections(categorisedCommits []Commit) Sections {
+func SplitSections(categorisedCommits []Commit) map[string][]Commit {
 	categoryMappings := map[string]string{
-		"feat":        "feat",
-		"chore":       "chore",
-		"improvement": "chore",
-		"bug":         "bug",
+		"feat":        "features",
+		"chore":       "chores",
+		"improvement": "chores",
+		"bug":         "bugs",
 		"other":       "other",
-		"fix": 		   "bug",
+		"fix":         "bugs",
 	}
 
-	var features []Commit
-	var chores []Commit
-	var bugs []Commit
-	var other []Commit
+	sections := make(map[string][]Commit)
 
 	for _, commit := range categorisedCommits {
-		if categoryMappings[commit.Category] == "feat" {
-			features = append(features, commit)
+		var category = categoryMappings[commit.Category]
+		if category != "other" {
+			log.Println(category)
+			sections[category] = append(sections[category], commit)
 		}
 
-		if categoryMappings[commit.Category] == "bug" {
-			bugs = append(bugs, commit)
-		}
-
-		if categoryMappings[commit.Category] == "chore" {
-			chores = append(chores, commit)
-		}
-
-		if categoryMappings[commit.Category] == "other" || categoryMappings[commit.Category] == "" {
-			other = append(other, commit)
+		if category == "other" || category == "" {
+			sections["others"] = append(sections["others"], commit)
 		}
 	}
 
-	return Sections{
-		Features: features,
-		Chores:   chores,
-		Bugs:     bugs,
-		Others:   other,
-	}
+	return sections
 }
