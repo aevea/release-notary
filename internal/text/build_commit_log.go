@@ -2,11 +2,15 @@ package text
 
 import "strings"
 
-func (r *ReleaseNotes) buildCommitLog(commits []Commit) string {
+func (r *ReleaseNotes) buildCommitLog(commits []Commit, open bool) string {
 	builder := strings.Builder{}
 
-	for _, commit := range commits {
-		builder.WriteString(r.buildSingleCommit(commit))
+	for index, commit := range commits {
+		last := false
+		if index+1 == len(commits) {
+			last = true
+		}
+		builder.WriteString(r.buildSingleCommit(commit, last, open))
 	}
 
 	builder.WriteString("\n")
