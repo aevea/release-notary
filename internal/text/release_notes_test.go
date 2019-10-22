@@ -1,13 +1,23 @@
 package text
 
 import (
+	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestReleaseNotes(t *testing.T) {
-	expected := "\n\n## Features :rocket:\n\n- 0000000 ci test\n\n## Bug fixes :bug:\n\n- 0000000 huge bug\n\n## Chores and Improvements :wrench:\n\n- 0000000 testing\n- 0000000 this should end up in chores\n\n## Other :package:\n\n- 0000000 merge master in something\n- 0000000 random\n\n"
+	file, err := os.Open("../../expected-output.md")
+
+	defer file.Close()
+
+	assert.NoError(t, err)
+
+	b, err := ioutil.ReadAll(file)
+
+	expected := string(b)
 
 	sections := Sections{
 		Features: []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
