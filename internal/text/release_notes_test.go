@@ -9,6 +9,7 @@ import (
 )
 
 func TestReleaseNotes(t *testing.T) {
+	notes := ReleaseNotes{}
 	file, err := os.Open("../../expected-output.md")
 
 	defer file.Close()
@@ -26,19 +27,20 @@ func TestReleaseNotes(t *testing.T) {
 		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
-	releaseNotes := ReleaseNotes(sections)
+	releaseNotes := notes.Generate(sections)
 
 	assert.Equal(t, expected, releaseNotes)
 }
 
 func TestReleaseNotesWithMissingSections(t *testing.T) {
+	notes := ReleaseNotes{}
 	expected := "\n\n## Features :rocket:\n\n- 0000000 ci test\n\n"
 
 	sections := map[string][]Commit{
 		"features": []Commit{Commit{Heading: "ci test"}},
 	}
 
-	releaseNotes := ReleaseNotes(sections)
+	releaseNotes := notes.Generate(sections)
 
 	assert.Equal(t, expected, releaseNotes)
 }
