@@ -2,7 +2,16 @@ package text
 
 import "strings"
 
-func buildSingleCommit(commit Commit) string {
+func (r *ReleaseNotes) buildSingleCommit(commit Commit) string {
+	builder := strings.Builder{}
+
+	commitMessage := buildSimpleCommit(commit)
+	builder.WriteString(commitMessage)
+
+	return builder.String()
+}
+
+func buildSimpleCommit(commit Commit) string {
 	builder := strings.Builder{}
 
 	builder.WriteString("- ")

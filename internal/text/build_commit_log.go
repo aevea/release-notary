@@ -2,11 +2,11 @@ package text
 
 import "strings"
 
-func buildCommitLog(commits []Commit) string {
+func (r *ReleaseNotes) buildCommitLog(commits []Commit) string {
 	builder := strings.Builder{}
 
 	for _, commit := range commits {
-		builder.WriteString(buildSingleCommit(commit))
+		builder.WriteString(r.buildSingleCommit(commit))
 	}
 
 	builder.WriteString("\n")

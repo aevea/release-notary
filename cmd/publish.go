@@ -105,9 +105,9 @@ var publishCmd = &cobra.Command{
 
 		sections := text.SplitSections(parsedCommits)
 
-		releaseNotes := text.ReleaseNotes(sections)
+		releaseNotes := text.ReleaseNotes{}
 
-		err = releaseService.Release(releaseNotes)
+		err = releaseService.Release(releaseNotes.Generate(sections))
 
 		if err != nil {
 			return err

@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func buildHeading(category string) string {
+func (r *ReleaseNotes) buildHeading(category string) string {
 	builder := strings.Builder{}
 
 	builder.WriteString("## ")

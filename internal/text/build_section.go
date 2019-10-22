@@ -2,11 +2,11 @@ package text
 
 import "strings"
 
-func buildSection(category string, commits []Commit) string {
+func (r *ReleaseNotes) buildSection(category string, commits []Commit) string {
 	builder := strings.Builder{}
 
-	builder.WriteString(buildHeading(category))
-	builder.WriteString(buildCommitLog(commits))
+	builder.WriteString(r.buildHeading(category))
+	builder.WriteString(r.buildCommitLog(commits))
 
 	return builder.String()
 }
