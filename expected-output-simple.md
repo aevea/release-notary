@@ -2,27 +2,15 @@ test heading
 
 ## Features :rocket:
 
-<details open><summary>0000000 ci test</summary>
-
-- Body
-
-</details>
+0000000 ci test
 
 ## Bug fixes :bug:
 
-<details><summary>0000000 huge bug</summary>
-
-Body
-
-</details>
+0000000 huge bug
 
 ## Chores and Improvements :wrench:
 
-<details><summary>0000000 testing</summary>
-
-- Body
-
-</details>  
+0000000 testing  
 0000000 this should end up in chores
 
 ## Other :package:
