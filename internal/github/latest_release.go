@@ -11,7 +11,7 @@ var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 // LatestRelease calls https://developer.github.com/v3/repos/releases/#get-the-latest-release and returns a Release struct
 func (g *Github) LatestRelease() (*release.Release, error) {
-	url := fmt.Sprintf("%v/repos/%v/%v/releases/latest", g.APIURL, g.owner, g.repo)
+	url := fmt.Sprintf("%v/%v/%v/releases/latest", g.APIURL, g.owner, g.repo)
 	response, err := g.client.Get(url)
 
 	if err != nil {
