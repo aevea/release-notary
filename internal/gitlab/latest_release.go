@@ -9,7 +9,7 @@ import (
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
-// LatestRelease gets the current tag. https://docs.gitlab.com/ee/api/releases/#get-a-release-by-a-tag-name Gitlab does not have support for latest release in API.
+// LatestRelease gets the current tag. https://docs.gitlab.com/ee/api/tags.html#get-a-single-repository-tag Gitlab does not have support for latest release in API.
 func (g *Gitlab) LatestRelease() (*release.Release, error) {
 	url := fmt.Sprintf("%v/projects/%v/repository/tags/%v", g.apiURL, g.projectID, g.tagName)
 	response, err := g.client.Get(url)
