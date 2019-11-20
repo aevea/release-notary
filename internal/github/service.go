@@ -8,6 +8,7 @@ import (
 type Github struct {
 	owner  string
 	repo   string
+	APIURL string
 	client *http.Client
 }
 
@@ -22,6 +23,7 @@ type githubRelease struct {
 func CreateGithubService(token, owner, repo string) *Github {
 
 	return &Github{
+		APIURL: "https://api.github.com",
 		owner:  owner,
 		repo:   repo,
 		client: createClient(token),
