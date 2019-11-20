@@ -23,7 +23,7 @@ type githubRelease struct {
 func CreateGithubService(token, owner, repo string) *Github {
 
 	return &Github{
-		APIURL: "https://api.github.com",
+		APIURL: "https://api.github.com/repos",
 		owner:  owner,
 		repo:   repo,
 		client: createClient(token),
