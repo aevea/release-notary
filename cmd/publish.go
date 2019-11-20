@@ -7,6 +7,7 @@ import (
 
 	history "github.com/commitsar-app/git/pkg"
 	"github.com/commitsar-app/release-notary/internal/releaser"
+	"github.com/commitsar-app/release-notary/internal/slack"
 	"github.com/commitsar-app/release-notary/internal/text"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -116,6 +117,18 @@ var publishCmd = &cobra.Command{
 
 		if err != nil {
 			return err
+		}
+
+		if viper.IsSet("SLACK_WEBHOOK") {
+			slack := &slack.Slack{
+				WebHookURL: viper.GetString("SLACK_WEBHOOK"),
+			}
+
+			err = slack.Publish(sections)
+
+			if err != nil {
+				return err
+			}
 		}
 
 		return nil
