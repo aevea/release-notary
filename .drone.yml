@@ -57,6 +57,8 @@ steps:
       GITHUB_TOKEN:
         from_secret: github_token
       GITHUB_REPOSITORY: commitsar-app/release-notary
+      SLACK_WEBHOOK:
+        from_secret: slack_webhook
     commands:
       - go run main.go publish
     when:
