@@ -12,7 +12,7 @@ import (
 
 func TestLatestRelease(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-		assert.Equal(t, "/repos/owner/repo/releases/latest", req.URL.String())
+		assert.Equal(t, "/owner/repo/releases/latest", req.URL.String())
 		assert.Equal(t, "token testtoken", req.Header["Authorization"][0])
 
 		testFile, err := ioutil.ReadFile("./testdata/latest_release.json")
