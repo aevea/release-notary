@@ -41,11 +41,22 @@ steps:
       event: [pull_request]
     depends_on: [fetch]
 
-  - name: docker
+  # This is here for backwards compatibility for repos using old naming
+  - name: docker-deprecated
     image: plugins/docker
     settings:
       auto_tag: true
       repo: commitsar/release-notary
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
+  - name: docker
+    image: plugins/docker
+    settings:
+      auto_tag: true
+      repo: outillage/release-notary
       username:
         from_secret: docker_username
       password:
