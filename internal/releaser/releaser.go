@@ -22,7 +22,6 @@ type Releaser struct {
 // Options are used to initialize releaser
 type Options struct {
 	Provider Provider
-	DryRun   bool
 	Token    string
 	Owner    string
 	Repo     string

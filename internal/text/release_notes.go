@@ -1,6 +1,7 @@
 package text
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -10,7 +11,7 @@ type ReleaseNotes struct {
 }
 
 // Generate generates the output mentioned in the expected-output.md
-func (r *ReleaseNotes) Generate(sections map[string][]Commit) string {
+func (r *ReleaseNotes) Generate(sections map[string][]Commit, dryRun bool) string {
 	builder := strings.Builder{}
 	// Extra lines at the start to make sure formatting starts correctly
 	builder.WriteString("\n\n")
@@ -29,6 +30,10 @@ func (r *ReleaseNotes) Generate(sections map[string][]Commit) string {
 
 	if len(sections["others"]) > 0 {
 		builder.WriteString(r.buildSection("others", sections["others"]))
+	}
+
+	if dryRun {
+		fmt.Print(builder.String())
 	}
 
 	return builder.String()

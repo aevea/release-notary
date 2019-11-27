@@ -29,7 +29,7 @@ func TestReleaseNotes(t *testing.T) {
 		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
-	releaseNotes := notes.Generate(sections)
+	releaseNotes := notes.Generate(sections, false)
 
 	assert.Equal(t, expected+"\n", "test heading"+releaseNotes)
 }
@@ -55,7 +55,7 @@ func TestReleaseNotesSimple(t *testing.T) {
 		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
-	releaseNotes := notes.Generate(sections)
+	releaseNotes := notes.Generate(sections, false)
 
 	assert.Equal(t, expected+"\n", "test heading"+releaseNotes)
 }
@@ -68,7 +68,7 @@ func TestReleaseNotesWithMissingSections(t *testing.T) {
 		"features": []Commit{Commit{Heading: "ci test"}},
 	}
 
-	releaseNotes := notes.Generate(sections)
+	releaseNotes := notes.Generate(sections, false)
 
 	assert.Equal(t, expected, releaseNotes)
 }
