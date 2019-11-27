@@ -36,7 +36,7 @@ steps:
       event: tag
 
   - name: validate-commits
-    image: commitsar/commitsar:0.8.0
+    image: outillage/commitsar:0.9.0
     when:
       event: [pull_request]
     depends_on: [fetch]
@@ -67,7 +67,7 @@ steps:
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
-      GITHUB_REPOSITORY: commitsar-app/release-notary
+      GITHUB_REPOSITORY: ${CI_REPO}
       SLACK_WEBHOOK:
         from_secret: slack_webhook
     commands:
