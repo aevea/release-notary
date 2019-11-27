@@ -27,7 +27,7 @@ func getCommits(repo *history.Git) ([]plumbing.Hash, error) {
 		return nil, err
 	}
 
-	commits := make([]plumbing.Hash, 0)
+	var commits []plumbing.Hash
 
 	// If previous tag is not available, or both tags are the same,
 	// provide empty hash so that all commits are iterated.

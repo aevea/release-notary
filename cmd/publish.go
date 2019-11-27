@@ -30,6 +30,11 @@ var publishCmd = &cobra.Command{
 			debug = true
 		}
 
+		dryRun := false
+		if cmd.Flag("dry-run").Value.String() == "true" {
+			dryRun = true
+		}
+
 		repo, err := history.OpenGit(".", debug)
 
 		if err != nil {
@@ -58,6 +63,23 @@ var publishCmd = &cobra.Command{
 			parsedCommits = append(parsedCommits,
 				parsedCommit,
 			)
+		}
+
+		sections := text.SplitSections(parsedCommits)
+
+		releaseNotes := text.ReleaseNotes{
+			Simple: simpleOutput,
+		}
+
+		content := releaseNotes.Generate(sections, dryRun)
+
+		if err != nil {
+			return err
+		}
+
+		if dryRun {
+			fmt.Println("my job here is done...")
+			return nil
 		}
 
 		viper.AutomaticEnv()
@@ -107,13 +129,7 @@ var publishCmd = &cobra.Command{
 			return errors.New("Missing release service, please consult documentation on required env vars")
 		}
 
-		sections := text.SplitSections(parsedCommits)
-
-		releaseNotes := text.ReleaseNotes{
-			Simple: simpleOutput,
-		}
-
-		err = releaseService.Release(releaseNotes.Generate(sections))
+		err = releaseService.Release(content)
 
 		if err != nil {
 			return err
