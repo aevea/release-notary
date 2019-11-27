@@ -16,7 +16,7 @@ steps:
       - name: deps
         path: /go
     commands:
-      - sh ./testdata/setup_test_repos.sh
+      - sh $(cd testdata && ./setup_test_repos.sh)
       - make ci
     when:
       event: [pull_request]
