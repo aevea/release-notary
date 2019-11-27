@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	history "github.com/commitsar-app/git/pkg"
+	history "github.com/outillage/git/pkg"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 

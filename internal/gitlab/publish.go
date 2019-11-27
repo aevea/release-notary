@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/commitsar-app/release-notary/internal/release"
+	"github.com/outillage/release-notary/internal/release"
 )
 
 // Publish publishes a Release https://docs.gitlab.com/ee/api/tags.html#create-a-new-release

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/commitsar-app/release-notary/internal/text"
+	"github.com/outillage/release-notary/internal/text"
 	jsoniter "github.com/json-iterator/go"
 )
 
