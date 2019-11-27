@@ -1,4 +1,5 @@
 build
 dist
-testdata/detached_tag
-testdata/single_branch_tags
+testdata/*
+!testdata/*.bundle
+!testdata/setup_test_repos.sh
