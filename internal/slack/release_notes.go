@@ -3,7 +3,7 @@ package slack
 import (
 	"strings"
 
-	"github.com/commitsar-app/release-notary/internal/text"
+	"github.com/outillage/release-notary/internal/text"
 )
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.

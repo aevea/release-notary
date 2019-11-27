@@ -3,7 +3,7 @@ package gitlab
 import (
 	"fmt"
 
-	"github.com/commitsar-app/release-notary/internal/release"
+	"github.com/outillage/release-notary/internal/release"
 	jsoniter "github.com/json-iterator/go"
 )
 

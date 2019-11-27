@@ -51,7 +51,7 @@ In Gitlab CI all the values are provided except for `GITLAB_TOKEN`. Documentatio
 
 #### Using Github actions
 
-Should be run only on tags, example is [HERE](https://github.com/commitsar-app/commitsar/blob/master/.github/workflows/release.yml):
+Should be run only on tags, example is [HERE](https://github.com/outillage/commitsar/blob/master/.github/workflows/release.yml):
 
 ```yml
 on:
@@ -95,7 +95,7 @@ release:
 Download and run: **(Substitute v0.0.2 for current version)**
 
 ```yml
-- curl -L -O https://github.com/commitsar-app/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/outillage/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf release-notary_v0.0.2_Linux_x86_64.tar.gz
 # Set up any required variables
 - export GITHUB_TOKEN=yourtoken

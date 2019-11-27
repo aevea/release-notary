@@ -3,7 +3,7 @@ package cmd
 import (
 	"testing"
 
-	history "github.com/commitsar-app/git/pkg"
+	history "github.com/outillage/git/pkg"
 	"github.com/stretchr/testify/assert"
 )
 

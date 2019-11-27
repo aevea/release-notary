@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/commitsar-app/release-notary/internal/release"
+	"github.com/outillage/release-notary/internal/release"
 )
 
 // Publish publishes a Release https://developer.github.com/v3/repos/releases/#edit-a-release

@@ -3,7 +3,7 @@ package slack
 import (
 	"testing"
 
-	"github.com/commitsar-app/release-notary/internal/text"
+	"github.com/outillage/release-notary/internal/text"
 	"github.com/stretchr/testify/assert"
 )
 
