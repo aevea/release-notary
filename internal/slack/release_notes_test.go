@@ -15,5 +15,13 @@ func TestGenerateReleaseNotes(t *testing.T) {
 		"others":   []text.Commit{text.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, text.Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
-	assert.Equal(t, "*Features*\r\nci test\r\n\r\n*Bug fixes*\r\nhuge bug\r\nbug fix\r\n\r\n*Chores and Improvements*\r\ntesting\r\nthis should end up in chores\r\n\r\n*Other*\r\nmerge master in something\r\nrandom\r\n\r\n", GenerateReleaseNotes(testData))
+	expectedOutput := WebhookMessage(WebhookMessage{
+		Blocks: []Block{
+			Block{Type: "section", Section: content{Type: "mrkdwn", Text: "*Features*\r\nci test\r\n"}},
+			Block{Type: "section", Section: content{Type: "mrkdwn", Text: "*Bug fixes*\r\nhuge bug\r\nbug fix\r\n"}},
+			Block{Type: "section", Section: content{Type: "mrkdwn", Text: "*Chores and Improvements*\r\ntesting\r\nthis should end up in chores\r\n"}},
+			Block{Type: "section", Section: content{Type: "mrkdwn", Text: "*Other*\r\nmerge master in something\r\nrandom\r\n"}}},
+	})
+
+	assert.Equal(t, expectedOutput, GenerateReleaseNotes(testData))
 }
