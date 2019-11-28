@@ -5,15 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/outillage/release-notary/internal/text"
 	jsoniter "github.com/json-iterator/go"
+	"github.com/outillage/release-notary/internal/text"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
-
-type request struct {
-	Text string `json:"text"`
-}
 
 // Publish pushes the release notes to Slack via provided Webhook. https://api.slack.com/reference/messaging/payload
 func (s *Slack) Publish(commits map[string][]text.Commit) error {
@@ -23,7 +19,7 @@ func (s *Slack) Publish(commits map[string][]text.Commit) error {
 		Timeout: time.Second * 5,
 	}
 
-	jsonBody, err := json.Marshal(request{Text: releaseNotes})
+	jsonBody, err := json.Marshal(releaseNotes)
 
 	if err != nil {
 		return err

@@ -7,43 +7,42 @@ import (
 )
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]text.Commit) string {
-	builder := strings.Builder{}
+func GenerateReleaseNotes(sections map[string][]text.Commit) WebhookMessage {
+	var blocks []Block
 
 	if len(sections["features"]) > 0 {
-		builder.WriteString("*Features*\r\n")
-		builder.WriteString(buildSection(sections["features"]))
-		builder.WriteString("\r\n")
+		section := Block{Type: "section", Section: buildSection("Features", sections["features"])}
+		blocks = append(blocks, section)
 	}
 
 	if len(sections["bugs"]) > 0 {
-		builder.WriteString("*Bug fixes*\r\n")
-		builder.WriteString(buildSection(sections["bugs"]))
-		builder.WriteString("\r\n")
+		section := Block{Type: "section", Section: buildSection("Bug fixes", sections["bugs"])}
+		blocks = append(blocks, section)
 	}
 
 	if len(sections["chores"]) > 0 {
-		builder.WriteString("*Chores and Improvements*\r\n")
-		builder.WriteString(buildSection(sections["chores"]))
-		builder.WriteString("\r\n")
+		section := Block{Type: "section", Section: buildSection("Chores and Improvements", sections["chores"])}
+		blocks = append(blocks, section)
 	}
 
 	if len(sections["others"]) > 0 {
-		builder.WriteString("*Other*\r\n")
-		builder.WriteString(buildSection(sections["others"]))
-		builder.WriteString("\r\n")
+		section := Block{Type: "section", Section: buildSection("Other", sections["others"])}
+		blocks = append(blocks, section)
 	}
 
-	return builder.String()
+	return WebhookMessage{Blocks: blocks}
 }
 
-func buildSection(commits []text.Commit) string {
+func buildSection(heading string, commits []text.Commit) content {
 	builder := strings.Builder{}
+	builder.WriteString("*" + heading + "*\r\n")
 
 	for _, commit := range commits {
 		builder.WriteString(commit.Heading)
 		builder.WriteString("\r\n")
 	}
 
-	return builder.String()
+	section := content{Type: "mrkdwn", Text: builder.String()}
+
+	return section
 }

@@ -19,9 +19,11 @@ func TestPublish(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody := "{\"text\":\"*Features*\\r\\nci test\\r\\n\\r\\n*Bug fixes*\\r\\nhuge bug\\r\\nbug fix\\r\\n\\r\\n*Chores and Improvements*\\r\\ntesting\\r\\nthis should end up in chores\\r\\n\\r\\n*Other*\\r\\nmerge master in something\\r\\nrandom\\r\\n\\r\\n\"}"
+		expectedBody, err := ioutil.ReadFile("./testdata/expected_output.txt")
 
-		assert.Equal(t, expectedBody, string(body))
+		assert.NoError(t, err)
+
+		assert.Equal(t, string(expectedBody), string(body))
 
 		_, err = rw.Write([]byte(`ok`))
 
