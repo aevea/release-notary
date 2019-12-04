@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	history "github.com/outillage/git/pkg"
+	"github.com/outillage/quoad"
 	"github.com/outillage/release-notary/internal/releaser"
 	"github.com/outillage/release-notary/internal/slack"
 	"github.com/outillage/release-notary/internal/text"
@@ -47,7 +48,7 @@ var publishCmd = &cobra.Command{
 			return err
 		}
 
-		var parsedCommits []text.Commit
+		var parsedCommits []quoad.Commit
 
 		for _, commit := range commits {
 			commitObject, err := repo.Commit(commit)
@@ -56,9 +57,9 @@ var publishCmd = &cobra.Command{
 				return err
 			}
 
-			parsedCommit := text.ParseCommitMessage(commitObject.Message)
+			parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
-			parsedCommit.Hash = text.Hash(commitObject.Hash)
+			parsedCommit.Hash = quoad.Hash(commitObject.Hash)
 
 			parsedCommits = append(parsedCommits,
 				parsedCommit,

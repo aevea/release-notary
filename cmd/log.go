@@ -4,6 +4,7 @@ import (
 	"log"
 
 	history "github.com/outillage/git/pkg"
+	"github.com/outillage/quoad"
 	"github.com/outillage/release-notary/internal/text"
 	"github.com/spf13/cobra"
 )
@@ -46,7 +47,7 @@ var logCmd = &cobra.Command{
 			return err
 		}
 
-		var parsedCommits []text.Commit
+		var parsedCommits []quoad.Commit
 
 		for _, commit := range commits {
 			commitObject, err := repo.Commit(commit)
@@ -56,7 +57,7 @@ var logCmd = &cobra.Command{
 			}
 
 			parsedCommits = append(parsedCommits,
-				text.ParseCommitMessage(commitObject.Message),
+				quoad.ParseCommitMessage(commitObject.Message),
 			)
 		}
 

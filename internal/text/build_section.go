@@ -1,8 +1,12 @@
 package text
 
-import "strings"
+import (
+	"strings"
 
-func (r *ReleaseNotes) buildSection(category string, commits []Commit) string {
+	"github.com/outillage/quoad"
+)
+
+func (r *ReleaseNotes) buildSection(category string, commits []quoad.Commit) string {
 	builder := strings.Builder{}
 
 	builder.WriteString(r.buildHeading(category))

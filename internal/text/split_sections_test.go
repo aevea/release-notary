@@ -3,25 +3,26 @@ package text
 import (
 	"testing"
 
+	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSplitSections(t *testing.T) {
-	dataset := []Commit{
-		Commit{Category: "chore", Scope: "", Heading: "testing"},
-		Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
-		Commit{Category: "other", Scope: "", Heading: "merge master in something"},
-		Commit{Category: "bs", Scope: "", Heading: "random"},
-		Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"},
-		Commit{Category: "bug", Scope: "", Heading: "huge bug"},
-		Commit{Category: "fix", Scope: "", Heading: "bug fix"},
+	dataset := []quoad.Commit{
+		quoad.Commit{Category: "chore", Scope: "", Heading: "testing"},
+		quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
+		quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"},
+		quoad.Commit{Category: "bs", Scope: "", Heading: "random"},
+		quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"},
+		quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"},
+		quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"},
 	}
 
-	expected := map[string][]Commit{
-		"features": []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
-		"bugs":     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}, Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
-		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
+	expected := map[string][]quoad.Commit{
+		"features": []quoad.Commit{quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		"chores":   []quoad.Commit{quoad.Commit{Category: "chore", Scope: "", Heading: "testing"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"bugs":     []quoad.Commit{quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"}, quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
+		"others":   []quoad.Commit{quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	sections := SplitSections(dataset)

@@ -1,9 +1,13 @@
 package text
 
-import "log"
+import (
+	"log"
+
+	"github.com/outillage/quoad"
+)
 
 // SplitSections accepts categorised commits and further organises them into separate sections for release notes
-func SplitSections(categorisedCommits []Commit) map[string][]Commit {
+func SplitSections(categorisedCommits []quoad.Commit) map[string][]quoad.Commit {
 	categoryMappings := map[string]string{
 		"feat":        "features",
 		"chore":       "chores",
@@ -13,7 +17,7 @@ func SplitSections(categorisedCommits []Commit) map[string][]Commit {
 		"fix":         "bugs",
 	}
 
-	sections := make(map[string][]Commit)
+	sections := make(map[string][]quoad.Commit)
 
 	for _, commit := range categorisedCommits {
 		var category = categoryMappings[commit.Category]

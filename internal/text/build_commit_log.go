@@ -1,8 +1,12 @@
 package text
 
-import "strings"
+import (
+	"strings"
 
-func (r *ReleaseNotes) buildCommitLog(commits []Commit, open bool) string {
+	"github.com/outillage/quoad"
+)
+
+func (r *ReleaseNotes) buildCommitLog(commits []quoad.Commit, open bool) string {
 	builder := strings.Builder{}
 
 	for index, commit := range commits {

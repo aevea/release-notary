@@ -6,13 +6,13 @@ import (
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
-	"github.com/outillage/release-notary/internal/text"
+	"github.com/outillage/quoad"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 // Publish pushes the release notes to Slack via provided Webhook. https://api.slack.com/reference/messaging/payload
-func (s *Slack) Publish(commits map[string][]text.Commit) error {
+func (s *Slack) Publish(commits map[string][]quoad.Commit) error {
 	releaseNotes := GenerateReleaseNotes(commits)
 
 	client := http.Client{

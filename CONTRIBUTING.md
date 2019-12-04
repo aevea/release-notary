@@ -2,6 +2,11 @@
 
 By participating to this project, you agree to abide our [code of conduct](/CODE_OF_CONDUCT.md).
 
+There are also some shared packages in the namespace:
+
+- For Git logic https://github.com/outillage/git
+- For Commit logic https://github.com/outillage/quoad
+
 # Pre-Requisites
 
 - `make`
