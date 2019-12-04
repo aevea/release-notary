@@ -3,11 +3,11 @@ package slack
 import (
 	"strings"
 
-	"github.com/outillage/release-notary/internal/text"
+	"github.com/outillage/quoad"
 )
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]text.Commit) WebhookMessage {
+func GenerateReleaseNotes(sections map[string][]quoad.Commit) WebhookMessage {
 	var blocks []Block
 
 	if len(sections["features"]) > 0 {
@@ -33,7 +33,7 @@ func GenerateReleaseNotes(sections map[string][]text.Commit) WebhookMessage {
 	return WebhookMessage{Blocks: blocks}
 }
 
-func buildSection(heading string, commits []text.Commit) content {
+func buildSection(heading string, commits []quoad.Commit) content {
 	builder := strings.Builder{}
 	builder.WriteString("*" + heading + "*\r\n")
 

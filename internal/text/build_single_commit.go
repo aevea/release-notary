@@ -3,9 +3,11 @@ package text
 import (
 	"fmt"
 	"strings"
+
+	"github.com/outillage/quoad"
 )
 
-func (r *ReleaseNotes) buildSingleCommit(commit Commit, isLast, open bool) string {
+func (r *ReleaseNotes) buildSingleCommit(commit quoad.Commit, isLast, open bool) string {
 	builder := strings.Builder{}
 
 	if r.Simple || commit.Body == "" {
@@ -21,7 +23,7 @@ func (r *ReleaseNotes) buildSingleCommit(commit Commit, isLast, open bool) strin
 	return builder.String()
 }
 
-func buildSimpleCommit(commit Commit) string {
+func buildSimpleCommit(commit quoad.Commit) string {
 	builder := strings.Builder{}
 
 	// Short version of hash usable on Github
@@ -36,7 +38,7 @@ func buildSimpleCommit(commit Commit) string {
 	return builder.String()
 }
 
-func buildFullCommit(commit Commit, open bool) string {
+func buildFullCommit(commit quoad.Commit, open bool) string {
 	builder := strings.Builder{}
 
 	// closed receives empty string

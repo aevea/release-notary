@@ -3,11 +3,12 @@ package text
 import (
 	"testing"
 
+	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestBuildFullCommit(t *testing.T) {
-	testCommit := Commit{Heading: "stuff", Body: "hi"}
+	testCommit := quoad.Commit{Heading: "stuff", Body: "hi"}
 
 	text := buildFullCommit(testCommit, false)
 

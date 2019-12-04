@@ -2,10 +2,12 @@ package text
 
 import (
 	"strings"
+
+	"github.com/outillage/quoad"
 )
 
 // BuildHistory takes commit messages and builds a complete list
-func BuildHistory(messages []Commit) string {
+func BuildHistory(messages []quoad.Commit) string {
 	builder := strings.Builder{}
 	builder.WriteString("\n")
 

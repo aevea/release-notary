@@ -3,16 +3,16 @@ package slack
 import (
 	"testing"
 
-	"github.com/outillage/release-notary/internal/text"
+	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGenerateReleaseNotes(t *testing.T) {
-	testData := map[string][]text.Commit{
-		"features": []text.Commit{text.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		"chores":   []text.Commit{text.Commit{Category: "chore", Scope: "", Heading: "testing"}, text.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
-		"bugs":     []text.Commit{text.Commit{Category: "bug", Scope: "", Heading: "huge bug"}, text.Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
-		"others":   []text.Commit{text.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, text.Commit{Category: "bs", Scope: "", Heading: "random"}},
+	testData := map[string][]quoad.Commit{
+		"features": []quoad.Commit{quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		"chores":   []quoad.Commit{quoad.Commit{Category: "chore", Scope: "", Heading: "testing"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"bugs":     []quoad.Commit{quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"}, quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
+		"others":   []quoad.Commit{quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	expectedOutput := WebhookMessage(WebhookMessage{
