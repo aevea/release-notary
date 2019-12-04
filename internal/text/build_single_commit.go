@@ -16,10 +16,6 @@ func (r *ReleaseNotes) buildSingleCommit(commit Commit, isLast, open bool) strin
 		builder.WriteString(commitMessage)
 	}
 
-	// Double space + \n creates a new line in markdown
-	if !isLast {
-		builder.WriteString("  ")
-	}
 	builder.WriteString("\n")
 
 	return builder.String()
@@ -32,6 +28,10 @@ func buildSimpleCommit(commit Commit) string {
 	builder.WriteString(commit.Hash.String()[:7])
 	builder.WriteString(" ")
 	builder.WriteString(commit.Heading)
+
+	for _, refID := range commit.Issues {
+		builder.WriteString(fmt.Sprintf(" #%d", refID))
+	}
 
 	return builder.String()
 }
@@ -53,6 +53,11 @@ func buildFullCommit(commit Commit, open bool) string {
 	builder.WriteString("</summary>")
 	builder.WriteString("\n\n")
 	builder.WriteString(commit.Body)
+
+	for _, refID := range commit.Issues {
+		builder.WriteString(fmt.Sprintf(" #%d", refID))
+	}
+
 	builder.WriteString("\n\n")
 	builder.WriteString("</details>")
 

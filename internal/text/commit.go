@@ -9,6 +9,7 @@ type Commit struct {
 	Body     string
 	Scope    string
 	Hash     Hash
+	Issues   []int
 }
 
 // Hash describes a commit hash

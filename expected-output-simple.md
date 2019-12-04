@@ -10,10 +10,10 @@ test heading
 
 ## Chores and Improvements :wrench:
 
-0000000 testing  
-0000000 this should end up in chores
+0000000 testing
+0000000 this should end up in chores #12
 
 ## Other :package:
 
-0000000 merge master in something  
+0000000 merge master in something
 0000000 random

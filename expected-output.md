@@ -22,10 +22,10 @@ Body
 
 - Body
 
-</details>  
-0000000 this should end up in chores
+</details>
+0000000 this should end up in chores #12
 
 ## Other :package:
 
-0000000 merge master in something  
+0000000 merge master in something
 0000000 random
