@@ -24,7 +24,7 @@ func TestReleaseNotes(t *testing.T) {
 
 	sections := map[string][]Commit{
 		"features": []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test", Body: "- Body"}},
-		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing", Body: "- Body"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing", Body: "- Body"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
 		"bugs":     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug", Body: "Body"}},
 		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
@@ -50,7 +50,7 @@ func TestReleaseNotesSimple(t *testing.T) {
 
 	sections := map[string][]Commit{
 		"features": []Commit{Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
+		"chores":   []Commit{Commit{Category: "chore", Scope: "", Heading: "testing"}, Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
 		"bugs":     []Commit{Commit{Category: "bug", Scope: "", Heading: "huge bug"}},
 		"others":   []Commit{Commit{Category: "other", Scope: "", Heading: "merge master in something"}, Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
