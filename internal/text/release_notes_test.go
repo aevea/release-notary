@@ -63,7 +63,7 @@ func TestReleaseNotesSimple(t *testing.T) {
 
 func TestReleaseNotesWithMissingSections(t *testing.T) {
 	notes := ReleaseNotes{}
-	expected := "\n\n## Features :rocket:\n\n0000000 ci test\n\n"
+	expected := "\n\n## :rocket: Features\n\n0000000 ci test\n\n"
 
 	sections := map[string][]quoad.Commit{
 		"features": []quoad.Commit{quoad.Commit{Heading: "ci test"}},

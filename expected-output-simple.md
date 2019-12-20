@@ -1,19 +1,19 @@
 test heading
 
-## Features :rocket:
+## :rocket: Features
 
 0000000 ci test
 
-## Bug fixes :bug:
+## :bug: Bug fixes
 
 0000000 huge bug
 
-## Chores and Improvements :wrench:
+## :wrench: Chores and Improvements
 
 0000000 testing
 0000000 this should end up in chores #12
 
-## Other :package:
+## :package: Other
 
 0000000 merge master in something
 0000000 random

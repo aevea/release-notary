@@ -10,13 +10,12 @@ func (r *ReleaseNotes) buildHeading(category string) string {
 
 	builder.WriteString("## ")
 
-	heading := fmt.Sprintf("%v ", sectionHeadings[category].title)
+	icon := fmt.Sprintf(":%v: ", sectionHeadings[category].icon)
+	builder.WriteString(icon)
+
+	heading := fmt.Sprintf("%v", sectionHeadings[category].title)
 
 	builder.WriteString(heading)
-
-	icon := fmt.Sprintf(":%v:", sectionHeadings[category].icon)
-
-	builder.WriteString(icon)
 
 	builder.WriteString("\n\n")
 
