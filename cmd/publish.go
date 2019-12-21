@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	history "github.com/outillage/git/v2"
+	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 	"github.com/outillage/release-notary/internal/releaser"
 	"github.com/outillage/release-notary/internal/slack"
@@ -143,7 +144,7 @@ var publishCmd = &cobra.Command{
 				WebHookURL: viper.GetString("SLACK_WEBHOOK"),
 			}
 
-			err = slack.Publish(sections)
+			err = slack.Publish(sections, integrations.GetGitRemote())
 
 			if err != nil {
 				return err

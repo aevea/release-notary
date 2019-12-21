@@ -4,13 +4,16 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
+	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPublish(t *testing.T) {
+	os.Clearenv()
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, "/webhook", req.URL.String())
 		assert.Equal(t, "application/json", req.Header["Content-Type"][0])
@@ -21,9 +24,17 @@ func TestPublish(t *testing.T) {
 
 		expectedBody, err := ioutil.ReadFile("./testdata/expected_output.txt")
 
-		assert.NoError(t, err)
+		type BlockList struct {
+			Blocks []Block
+		}
 
-		assert.Equal(t, string(expectedBody), string(body))
+		var receivedBlocks, expectedBlocks BlockList
+
+		rbErr, ebErr := json.Unmarshal(body, &receivedBlocks), json.Unmarshal(expectedBody, &expectedBlocks)
+
+		assert.NoError(t, rbErr)
+		assert.NoError(t, ebErr)
+		assert.ElementsMatch(t, expectedBlocks.Blocks, receivedBlocks.Blocks)
 
 		_, err = rw.Write([]byte(`ok`))
 
@@ -37,13 +48,29 @@ func TestPublish(t *testing.T) {
 	}
 
 	testData := map[string][]quoad.Commit{
-		"features": []quoad.Commit{quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		"chores":   []quoad.Commit{quoad.Commit{Category: "chore", Scope: "", Heading: "testing"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores"}},
-		"bugs":     []quoad.Commit{quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"}, quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"}},
-		"others":   []quoad.Commit{quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
+		"features": []quoad.Commit{
+			quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
+		},
+		"bugs": []quoad.Commit{
+			quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"},
+			quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"},
+		},
+		"chores": []quoad.Commit{
+			quoad.Commit{Category: "chore", Scope: "", Heading: "testing", Issues: []int{1, 2}},
+			quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{3}},
+		},
+		"others": []quoad.Commit{
+			quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"},
+			quoad.Commit{Category: "bs", Scope: "", Heading: "random"},
+		},
 	}
 
-	err := slack.Publish(testData)
+	remote := integrations.GitRemote{
+		Host:    "example.com",
+		Project: "some/thing",
+	}
+
+	err := slack.Publish(testData, remote)
 
 	assert.NoError(t, err)
 }

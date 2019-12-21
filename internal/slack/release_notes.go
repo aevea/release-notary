@@ -1,44 +1,150 @@
 package slack
 
 import (
+	"fmt"
+	"os"
 	"strings"
 
+	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
+	"github.com/outillage/release-notary/internal"
 )
 
+func pluralize(base string, count int) string {
+	builder := strings.Builder{}
+	builder.WriteString(fmt.Sprintf("%d %s", count, base))
+
+	if count != 1 {
+		builder.WriteString("s")
+	}
+
+	return builder.String()
+}
+
+func countReferences(commits []quoad.Commit) int {
+	count := 0
+
+	for _, commit := range commits {
+		count += len(commit.Issues)
+	}
+
+	return count
+}
+
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]quoad.Commit) WebhookMessage {
-	var blocks []Block
+func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote integrations.GitRemote) WebhookMessage {
+	blocks := []Block{buildReleaseTitle(remote)}
 
-	if len(sections["features"]) > 0 {
-		section := Block{Type: "section", Section: buildSection("Features", sections["features"])}
-		blocks = append(blocks, section)
-	}
+	for name, commits := range sections {
+		if len(commits) > 0 {
+			sectionInfo := internal.PredefinedSections[name]
 
-	if len(sections["bugs"]) > 0 {
-		section := Block{Type: "section", Section: buildSection("Bug fixes", sections["bugs"])}
-		blocks = append(blocks, section)
-	}
+			sectionTitle := Block{
+				Type: "section",
+				Section: content{
+					Type: "mrkdwn",
+					Text: fmt.Sprintf(":%s: *%s*", sectionInfo.Icon, sectionInfo.Title),
+				},
+			}
 
-	if len(sections["chores"]) > 0 {
-		section := Block{Type: "section", Section: buildSection("Chores and Improvements", sections["chores"])}
-		blocks = append(blocks, section)
-	}
+			sectionContext := Block{
+				Type: "context",
+				Elements: []content{
+					content{
+						Type: "mrkdwn",
+						Text: fmt.Sprintf(
+							"%s referencing %s",
+							pluralize("commit", len(commits)),
+							pluralize("issue", countReferences(commits)),
+						),
+					},
+				},
+			}
 
-	if len(sections["others"]) > 0 {
-		section := Block{Type: "section", Section: buildSection("Other", sections["others"])}
-		blocks = append(blocks, section)
+			sectionCommits := Block{
+				Type:    "section",
+				Section: buildCommitList(commits, remote.GetRemoteURL()),
+			}
+
+			blocks = append(
+				blocks,
+				sectionTitle,
+				sectionContext,
+				sectionCommits,
+				Block{Type: "divider"},
+			)
+		}
 	}
 
 	return WebhookMessage{Blocks: blocks}
 }
 
-func buildSection(heading string, commits []quoad.Commit) content {
+func buildReleaseTitle(remote integrations.GitRemote) Block {
+	// This is also quite hacky, it shouldn't be done here, but somewhere before
+	release, isGitLab := os.LookupEnv("GITHUB_REPOSITORY")
+	remoteURL := remote.GetRemoteURL()
+
+	if isGitLab {
+		return Block{
+			Type: "section",
+			Section: content{
+				Type: "mrkdwn",
+				Text: fmt.Sprintf(
+					":tada: Release <%s/releases/tag/%s|*%s*> for <%s|*%s*>",
+					remoteURL,
+					release,
+					release,
+					remoteURL,
+					remote.Project,
+				),
+			},
+		}
+	}
+
+	// For GitHub it will be skipped for now :/ We'll need to fetch it via the API
+	return Block{
+		Type: "section",
+		Section: content{
+			Type: "mrkdwn",
+			Text: fmt.Sprintf(":tada: New release for <%s|*%s*>", remoteURL, remote.Project),
+		},
+	}
+}
+
+func buildCommitList(commits []quoad.Commit, remote string) content {
 	builder := strings.Builder{}
-	builder.WriteString("*" + heading + "*\r\n")
 
 	for _, commit := range commits {
-		builder.WriteString(commit.Heading)
+		smallHash := commit.Hash.String()[:8]
+
+		builder.WriteString(
+			fmt.Sprintf(
+				"`%s` <%s/commit/%s|*%s*>",
+				smallHash,
+				remote,
+				smallHash,
+				commit.Heading,
+			),
+		)
+
+		refLinks := []string{}
+
+		for _, ref := range commit.Issues {
+			refLinks = append(
+				refLinks,
+				fmt.Sprintf(
+					"<%s/issues/%d|#%d>",
+					remote,
+					ref,
+					ref,
+				),
+			)
+		}
+
+		if len(refLinks) > 0 {
+			builder.WriteString(fmt.Sprintf(" _ref %s_", strings.Join(refLinks, ",")))
+		}
+
 		builder.WriteString("\r\n")
 	}
 

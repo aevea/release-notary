@@ -3,6 +3,8 @@ package text
 import (
 	"fmt"
 	"strings"
+
+	"github.com/outillage/release-notary/internal"
 )
 
 func (r *ReleaseNotes) buildHeading(category string) string {
@@ -10,10 +12,11 @@ func (r *ReleaseNotes) buildHeading(category string) string {
 
 	builder.WriteString("## ")
 
-	icon := fmt.Sprintf(":%v: ", sectionHeadings[category].icon)
+	icon := fmt.Sprintf(":%v: ", internal.PredefinedSections[category].Icon)
+
 	builder.WriteString(icon)
 
-	heading := fmt.Sprintf("%v", sectionHeadings[category].title)
+	heading := fmt.Sprintf("%v", internal.PredefinedSections[category].Title)
 
 	builder.WriteString(heading)
 
