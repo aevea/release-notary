@@ -30,6 +30,14 @@ func buildSimpleCommit(commit quoad.Commit) string {
 	builder.WriteString("- ")
 	builder.WriteString(commit.Hash.String()[:7])
 	builder.WriteString(" ")
+
+	if commit.Scope != "" {
+		builder.WriteString("**(")
+		builder.WriteString(commit.Scope)
+		builder.WriteString(")**")
+		builder.WriteString(" ")
+	}
+
 	builder.WriteString(commit.Heading)
 
 	for _, refID := range commit.Issues {
