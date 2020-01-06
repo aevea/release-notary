@@ -2,7 +2,7 @@ test heading
 
 ## :rocket: Features
 
-- 0000000 ci test
+- 0000000 **(ci)** ci test
 
 ## :bug: Bug fixes
 
