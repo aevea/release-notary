@@ -10,7 +10,7 @@ import (
 func (r *ReleaseNotes) buildSingleCommit(commit quoad.Commit, isLast, open bool) string {
 	builder := strings.Builder{}
 
-	if r.Simple || commit.Body == "" {
+	if !r.Complex || commit.Body == "" {
 		simpleCommitMessage := buildSimpleCommit(commit)
 		builder.WriteString(simpleCommitMessage)
 	} else {

@@ -10,7 +10,7 @@ import (
 )
 
 func TestReleaseNotes(t *testing.T) {
-	notes := ReleaseNotes{}
+	notes := ReleaseNotes{Complex: true}
 	file, err := os.Open("../../expected-output.md")
 
 	assert.NoError(t, err)

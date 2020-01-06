@@ -3,13 +3,13 @@ package text
 import (
 	"fmt"
 	"strings"
-	
+
 	"github.com/outillage/quoad"
 )
 
 // ReleaseNotes holds the required settings for generating ReleaseNotes
 type ReleaseNotes struct {
-	Simple bool
+	Complex bool
 }
 
 // Generate generates the output mentioned in the expected-output.md
