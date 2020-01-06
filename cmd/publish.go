@@ -14,10 +14,10 @@ import (
 	"github.com/spf13/viper"
 )
 
-var simpleOutput bool
+var complexOutput bool
 
 func init() {
-	publishCmd.PersistentFlags().BoolVar(&simpleOutput, "simple", false, "use simplified output")
+	publishCmd.PersistentFlags().BoolVar(&complexOutput, "complex", false, "use complex output")
 	rootCmd.AddCommand(publishCmd)
 }
 
@@ -69,7 +69,7 @@ var publishCmd = &cobra.Command{
 		sections := text.SplitSections(parsedCommits)
 
 		releaseNotes := text.ReleaseNotes{
-			Simple: simpleOutput,
+			Complex: complexOutput,
 		}
 
 		content := releaseNotes.Generate(sections, dryRun)
