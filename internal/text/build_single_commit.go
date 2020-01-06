@@ -27,6 +27,7 @@ func buildSimpleCommit(commit quoad.Commit) string {
 	builder := strings.Builder{}
 
 	// Short version of hash usable on Github
+	builder.WriteString("- ")
 	builder.WriteString(commit.Hash.String()[:7])
 	builder.WriteString(" ")
 	builder.WriteString(commit.Heading)
