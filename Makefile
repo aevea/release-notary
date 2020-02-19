@@ -13,5 +13,8 @@ go-mod-tidy:
 	go mod tidy -v
 	git diff-index --quiet HEAD
 
+setup-tests:
+	sh ./testdata/setup_test_repos.sh
+
 # Run all tests & linters in CI
 ci: test go-mod-tidy
