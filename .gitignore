@@ -3,3 +3,4 @@ dist
 testdata/*
 !testdata/*.bundle
 !testdata/setup_test_repos.sh
+.idea
