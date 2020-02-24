@@ -36,7 +36,7 @@ steps:
       event: tag
 
   - name: validate-commits
-    image: outillage/commitsar:0.10.0
+    image: outillage/commitsar:0.11.1
     when:
       event: [pull_request]
     depends_on: [fetch]
