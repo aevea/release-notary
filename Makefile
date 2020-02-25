@@ -17,4 +17,4 @@ setup-tests:
 	sh ./testdata/setup_test_repos.sh
 
 # Run all tests & linters in CI
-ci: test go-mod-tidy
+ci: setup-tests test go-mod-tidy
