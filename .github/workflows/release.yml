@@ -24,13 +24,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: goreleaser
-        uses: docker://goreleaser/goreleaser
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: release
-        if: success()
+      # Temp blocker until issue in GH Action fixed
+#      - name: goreleaser
+#        uses: docker://goreleaser/goreleaser
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          args: release
+#        if: success()
 
       - name: Kaniko build
         uses: outillage/kaniko-action@master
