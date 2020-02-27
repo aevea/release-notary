@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/json-iterator/go v1.1.9
-	github.com/outillage/git/v2/v2 v2.0.1
+	github.com/outillage/git/v2 v2.0.1
 	github.com/outillage/quoad v0.2.0
 	github.com/spf13/cobra v0.0.6
 	github.com/spf13/viper v1.6.2
