@@ -1,6 +1,8 @@
 # Release notary
 
-[![Build Status](https://cloud.drone.io/api/badges/commitsar-app/release-notary/status.svg)](https://cloud.drone.io/commitsar-app/release-notary)
+![Test](https://github.com/outillage/release-notary/workflows/Test/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/outillage/release-notary?style=flat-square)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/outillage/release-notary/latest?style=flat-square)
 
 Release Notary builds release notes using [Conventional Commit](https://www.conventionalcommits.org/) standard and then publishes it to Github. Release notes are appended to any text you already have in your release and therefore will not affect important announcements etc.
 
