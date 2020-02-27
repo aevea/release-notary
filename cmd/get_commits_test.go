@@ -3,12 +3,12 @@ package cmd
 import (
 	"testing"
 
-	history "github.com/outillage/git/pkg"
+	history "github.com/outillage/git/v2"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGetCommitsDetachedTags(t *testing.T) {
-	repo, err := history.OpenGit("../testdata/detached_tag", false)
+	repo, err := history.OpenGit("../testdata/detached_tag", nil)
 
 	assert.NoError(t, err)
 
@@ -30,7 +30,7 @@ func TestGetCommitsDetachedTags(t *testing.T) {
 }
 
 func TestGetCommitsSingleBranch(t *testing.T) {
-	repo, err := history.OpenGit("../testdata/single_branch_tags", false)
+	repo, err := history.OpenGit("../testdata/single_branch_tags", nil)
 
 	assert.NoError(t, err)
 
@@ -52,7 +52,7 @@ func TestGetCommitsSingleBranch(t *testing.T) {
 }
 
 func TestGetCommitsReleaseCommit(t *testing.T) {
-	repo, err := history.OpenGit("../testdata/release_commit", false)
+	repo, err := history.OpenGit("../testdata/release_commit", nil)
 
 	assert.NoError(t, err)
 
@@ -76,7 +76,7 @@ func TestGetCommitsReleaseCommit(t *testing.T) {
 }
 
 func TestGetCommitsReleaseNonCompliantCommit(t *testing.T) {
-	repo, err := history.OpenGit("../testdata/release_noncompliant_commit", false)
+	repo, err := history.OpenGit("../testdata/release_noncompliant_commit", nil)
 
 	assert.NoError(t, err)
 

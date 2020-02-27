@@ -3,9 +3,12 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"strings"
 
-	history "github.com/outillage/git/pkg"
+	history "github.com/outillage/git/v2"
 	"github.com/outillage/quoad"
 	"github.com/outillage/release-notary/internal/releaser"
 	"github.com/outillage/release-notary/internal/slack"
@@ -26,17 +29,16 @@ var publishCmd = &cobra.Command{
 	Short: "Publishes release notes",
 	Long:  "",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		debug := false
-		if cmd.Flag("verbose").Value.String() == "true" {
-			debug = true
+		debugLogger := log.Logger{}
+		debugLogger.SetPrefix("[DEBUG] ")
+		debugLogger.SetOutput(os.Stdout)
+
+		if !Verbose {
+			debugLogger.SetOutput(ioutil.Discard)
+			debugLogger.SetPrefix("")
 		}
 
-		dryRun := false
-		if cmd.Flag("dry-run").Value.String() == "true" {
-			dryRun = true
-		}
-
-		repo, err := history.OpenGit(".", debug)
+		repo, err := history.OpenGit(".", &debugLogger)
 
 		if err != nil {
 			return err
@@ -72,13 +74,13 @@ var publishCmd = &cobra.Command{
 			Complex: complexOutput,
 		}
 
-		content := releaseNotes.Generate(sections, dryRun)
+		content := releaseNotes.Generate(sections, DryRun)
 
 		if err != nil {
 			return err
 		}
 
-		if dryRun {
+		if DryRun {
 			fmt.Println("my job here is done...")
 			return nil
 		}

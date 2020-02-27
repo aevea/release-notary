@@ -97,8 +97,8 @@ github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742 h1:Esafd1046DLD
 github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
-github.com/outillage/git v1.2.6 h1:mWCPxhxkuSLKd4dvnV3GXsDU2Oon10BgD6qOM+ljkZA=
-github.com/outillage/git v1.2.6/go.mod h1:5gcZpe6CD8GesH9UAeYYAEPn3987FeSSeZwkxFNeePA=
+github.com/outillage/git/v2 v2.0.1 h1:spc5mZmSvB05Yjz119tpiDCFMQKlglEHDcSqzBA2Log=
+github.com/outillage/git/v2 v2.0.1/go.mod h1:c6L0qnmoC0TYDt9Cer+HziO77yzvrfNlPAEXBAH+HRM=
 github.com/outillage/quoad v0.2.0 h1:jAFYegH3ASd3YEQCVuviHMiWDFxQAOfl7ox4BSBPriY=
 github.com/outillage/quoad v0.2.0/go.mod h1:VdBGieQx7EtZDWn10L2fyW6ZT3uDstIhlTbPwDNL25o=
 github.com/pelletier/go-buffruneio v0.2.0/go.mod h1:JkE26KsDizTr40EUHkXVtNPvgGtbSNq5BcowyYOWdKo=
