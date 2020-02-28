@@ -6,7 +6,6 @@ import (
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
-	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 )
 
@@ -23,7 +22,7 @@ func jsonMarshal(t interface{}) ([]byte, error) {
 }
 
 // Publish pushes the release notes to Slack via provided Webhook. https://api.slack.com/reference/messaging/payload
-func (s *Slack) Publish(commits map[string][]quoad.Commit, remote integrations.GitRemote) error {
+func (s *Slack) Publish(commits map[string][]quoad.Commit, remote GitRemoter) error {
 	releaseNotes := GenerateReleaseNotes(commits, remote)
 
 	client := http.Client{

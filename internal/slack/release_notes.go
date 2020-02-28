@@ -5,7 +5,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 	"github.com/outillage/release-notary/internal"
 )
@@ -32,7 +31,7 @@ func countReferences(commits []quoad.Commit) int {
 }
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote integrations.GitRemote) WebhookMessage {
+func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote GitRemoter) WebhookMessage {
 	blocks := []Block{buildReleaseTitle(remote)}
 
 	for name, commits := range sections {
@@ -79,12 +78,13 @@ func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote integration
 	return WebhookMessage{Blocks: blocks}
 }
 
-func buildReleaseTitle(remote integrations.GitRemote) Block {
+func buildReleaseTitle(remote GitRemoter) Block {
 	// This is also quite hacky, it shouldn't be done here, but somewhere before
-	release, isGitLab := os.LookupEnv("GITHUB_REPOSITORY")
+	release, isGithub := os.LookupEnv("GITHUB_REPOSITORY")
 	remoteURL := remote.GetRemoteURL()
 
-	if isGitLab {
+	// TODO: Improve this logic
+	if !isGithub {
 		return Block{
 			Type: "section",
 			Section: content{
@@ -95,7 +95,7 @@ func buildReleaseTitle(remote integrations.GitRemote) Block {
 					release,
 					release,
 					remoteURL,
-					remote.Project,
+					remote.Project(),
 				),
 			},
 		}
@@ -106,7 +106,7 @@ func buildReleaseTitle(remote integrations.GitRemote) Block {
 		Type: "section",
 		Section: content{
 			Type: "mrkdwn",
-			Text: fmt.Sprintf(":tada: New release for <%s|*%s*>", remoteURL, remote.Project),
+			Text: fmt.Sprintf(":tada: New release for <%s|*%s*>", remoteURL, remote.Project()),
 		},
 	}
 }
