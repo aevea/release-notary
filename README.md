@@ -19,6 +19,7 @@ Expected output is [HERE](./expected-output.md)
 1. [Setup](#setup)
    - [Github](#github)
    - [Gitlab](#gitlab)
+   - [Slack](#slack)
 2. [Usage](#usage)
 
 ## Setup
@@ -31,7 +32,6 @@ Expected output is [HERE](./expected-output.md)
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | GITHUB_TOKEN      | token (provided in Github Action or [HERE](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)) | true     |
 | GITHUB_REPOSITORY | commitsar-app/commitsar                                                                                                                | true     |
-| SLACK_WEBHOOK     | https://hooks.slack.com/services/something/something/something                                                                         | false    |
 
 In Github actions GITHUB_REPOSITORY is provided in the correct format. Does not need to be explicitly added.
 
@@ -49,6 +49,13 @@ In Gitlab CI all the values are provided except for `GITLAB_TOKEN`. Documentatio
 | CI_API_V4_URL | https://gitlab.com/api/v4                                      | true     |
 | CI_COMMIT_TAG | v0.0.4                                                         | true     |
 | CI_PROJECT_ID | 1234                                                           | true     |
+
+### Slack
+
+Slack integration posts release notes into Slack using the `Incoming webhook` integration. [Slack Documentation](https://api.slack.com/messaging/webhooks)
+
+| Name          | Example value                                                  | Required |
+| ------------- | -------------------------------------------------------------- | -------- |
 | SLACK_WEBHOOK | https://hooks.slack.com/services/something/something/something | false    |
 
 ## Usage
