@@ -7,7 +7,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/outillage/git/v2 v2.0.1
-	github.com/outillage/integrations v0.2.0
+	github.com/outillage/integrations v0.3.0
 	github.com/outillage/quoad v0.2.0
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect

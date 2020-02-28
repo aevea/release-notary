@@ -4,16 +4,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 
-	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPublish(t *testing.T) {
-	os.Clearenv()
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, "/webhook", req.URL.String())
 		assert.Equal(t, "application/json", req.Header["Content-Type"][0])
@@ -65,10 +62,7 @@ func TestPublish(t *testing.T) {
 		},
 	}
 
-	remote := integrations.GitRemote{
-		Host:    "example.com",
-		Project: "some/thing",
-	}
+	remote := MockRemote{}
 
 	err := slack.Publish(testData, remote)
 

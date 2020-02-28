@@ -4,3 +4,9 @@ package slack
 type Slack struct {
 	WebHookURL string
 }
+
+type GitRemoter interface {
+	GetRemoteURL() string
+	Host() string
+	Project() string
+}

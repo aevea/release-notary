@@ -2,10 +2,8 @@ package slack
 
 import (
 	"fmt"
-	"os"
 	"testing"
 
-	"github.com/outillage/integrations"
 	"github.com/outillage/quoad"
 	"github.com/stretchr/testify/assert"
 )
@@ -19,11 +17,7 @@ func ref(issue int) string {
 }
 
 func TestGenerateReleaseNotes(t *testing.T) {
-	os.Clearenv()
-	remote := integrations.GitRemote{
-		Host:    "example.com",
-		Project: "some/thing",
-	}
+	remote := MockRemote{}
 
 	testData := map[string][]quoad.Commit{
 		"features": []quoad.Commit{
@@ -166,5 +160,5 @@ func TestGenerateReleaseNotes(t *testing.T) {
 		},
 	})
 
-	assert.Equal(t, expectedOutput, GenerateReleaseNotes(testData, remote))
+	assert.ElementsMatch(t, expectedOutput.Blocks, GenerateReleaseNotes(testData, remote).Blocks)
 }
