@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+
+jobs:
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Kaniko build
+        uses: outillage/kaniko-action@master
+        with:
+          image: outillage/release-notary
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          cache: true
+          cache_registry: outillage/cache
+          strip_tag_prefix: v
