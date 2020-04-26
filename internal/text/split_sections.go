@@ -3,7 +3,7 @@ package text
 import (
 	"log"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 // SplitSections accepts categorised commits and further organises them into separate sections for release notes

@@ -3,7 +3,7 @@ package text
 import (
 	"strings"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 // BuildHistory takes commit messages and builds a complete list

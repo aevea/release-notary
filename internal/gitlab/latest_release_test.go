@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/outillage/release-notary/internal/release"
+	"github.com/aevea/release-notary/internal/release"
 	"github.com/stretchr/testify/assert"
 )
 

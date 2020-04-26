@@ -3,9 +3,9 @@ package releaser
 import (
 	"fmt"
 
-	"github.com/outillage/release-notary/internal/github"
-	"github.com/outillage/release-notary/internal/gitlab"
-	"github.com/outillage/release-notary/internal/release"
+	"github.com/aevea/release-notary/internal/github"
+	"github.com/aevea/release-notary/internal/gitlab"
+	"github.com/aevea/release-notary/internal/release"
 )
 
 // Service describes the basic usage needed from a service such as Github

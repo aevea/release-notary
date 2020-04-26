@@ -4,8 +4,8 @@ By participating to this project, you agree to abide our [code of conduct](/CODE
 
 There are also some shared packages in the namespace:
 
-- For Git logic https://github.com/outillage/git
-- For Commit logic https://github.com/outillage/quoad
+- For Git logic https://github.com/aevea/git
+- For Commit logic https://github.com/aevea/quoad
 
 # Pre-Requisites
 

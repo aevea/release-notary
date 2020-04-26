@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/outillage/release-notary/internal"
+	"github.com/aevea/release-notary/internal"
 )
 
 func (r *ReleaseNotes) buildHeading(category string) string {

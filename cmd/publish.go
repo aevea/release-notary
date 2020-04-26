@@ -8,12 +8,12 @@ import (
 	"os"
 	"strings"
 
-	history "github.com/outillage/git/v2"
-	"github.com/outillage/integrations"
-	"github.com/outillage/quoad"
-	"github.com/outillage/release-notary/internal/releaser"
-	"github.com/outillage/release-notary/internal/slack"
-	"github.com/outillage/release-notary/internal/text"
+	history "github.com/aevea/git/v2"
+	"github.com/aevea/integrations"
+	"github.com/aevea/quoad"
+	"github.com/aevea/release-notary/internal/releaser"
+	"github.com/aevea/release-notary/internal/slack"
+	"github.com/aevea/release-notary/internal/text"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 // ReleaseNotes holds the required settings for generating ReleaseNotes

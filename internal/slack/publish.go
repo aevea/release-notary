@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/aevea/quoad"
 	jsoniter "github.com/json-iterator/go"
-	"github.com/outillage/quoad"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary

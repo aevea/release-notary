@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 func (r *ReleaseNotes) buildSingleCommit(commit quoad.Commit, isLast, open bool) string {

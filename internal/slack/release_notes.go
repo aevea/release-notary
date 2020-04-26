@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/outillage/quoad"
-	"github.com/outillage/release-notary/internal"
+	"github.com/aevea/quoad"
+	"github.com/aevea/release-notary/internal"
 )
 
 func pluralize(base string, count int) string {
