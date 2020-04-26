@@ -12,7 +12,7 @@ RUN make install_deps
 COPY . /app/
 RUN make build/docker
 
-FROM alpine:3.11.5
+FROM alpine:3.11.6
 RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
 
