@@ -1,8 +1,8 @@
 # Release notary
 
-![Test](https://github.com/outillage/release-notary/workflows/Test/badge.svg)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/outillage/release-notary?style=flat-square)
-![GitHub commits since latest release](https://img.shields.io/github/commits-since/outillage/release-notary/latest?style=flat-square)
+![Test](https://github.com/aevea/release-notary/workflows/Test/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/aevea/release-notary?style=flat-square)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/aevea/release-notary/latest?style=flat-square)
 
 Release Notary builds release notes using [Conventional Commit](https://www.conventionalcommits.org/) standard and then publishes it to Github. Release notes are appended to any text you already have in your release and therefore will not affect important announcements etc.
 
@@ -62,7 +62,7 @@ Slack integration posts release notes into Slack using the `Incoming webhook` in
 
 #### Using Github actions
 
-Should be run only on tags, example is [HERE](https://github.com/outillage/commitsar/blob/master/.github/workflows/release.yml):
+Should be run only on tags, example is [HERE](https://github.com/aevea/commitsar/blob/master/.github/workflows/release.yml):
 
 ```yml
 on:
@@ -106,7 +106,7 @@ release:
 Download and run: **(Substitute v0.0.2 for current version)**
 
 ```yml
-- curl -L -O https://github.com/outillage/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/aevea/release-notary/releases/download/v0.0.2/release-notary_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf release-notary_v0.0.2_Linux_x86_64.tar.gz
 # Set up any required variables
 - export GITHUB_TOKEN=yourtoken

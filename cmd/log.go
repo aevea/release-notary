@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	history "github.com/outillage/git/v2"
-	"github.com/outillage/quoad"
-	"github.com/outillage/release-notary/internal/text"
+	history "github.com/aevea/git/v2"
+	"github.com/aevea/quoad"
+	"github.com/aevea/release-notary/internal/text"
 	"github.com/spf13/cobra"
 )
 

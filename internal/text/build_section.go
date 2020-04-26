@@ -3,8 +3,8 @@ package text
 import (
 	"strings"
 
-	"github.com/outillage/quoad"
-	"github.com/outillage/release-notary/internal"
+	"github.com/aevea/quoad"
+	"github.com/aevea/release-notary/internal"
 )
 
 func (r *ReleaseNotes) buildSection(category string, commits []quoad.Commit) string {

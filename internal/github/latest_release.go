@@ -3,7 +3,7 @@ package github
 import (
 	"fmt"
 
-	"github.com/outillage/release-notary/internal/release"
+	"github.com/aevea/release-notary/internal/release"
 	jsoniter "github.com/json-iterator/go"
 )
 

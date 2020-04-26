@@ -3,7 +3,7 @@ package text
 import (
 	"strings"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 func (r *ReleaseNotes) buildCommitLog(commits []quoad.Commit, open bool) string {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 	"github.com/stretchr/testify/assert"
 )
 

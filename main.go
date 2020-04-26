@@ -1,6 +1,6 @@
 package main
 
-import "github.com/outillage/release-notary/cmd"
+import "github.com/aevea/release-notary/cmd"
 
 func main() {
 	cmd.Execute()

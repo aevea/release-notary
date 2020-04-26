@@ -16,7 +16,17 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Kaniko build
-        uses: outillage/kaniko-action@master
+        uses: aevea/kaniko-action@master
+        with:
+          image: aevea/release-notary
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          cache: true
+          cache_registry: aevea/cache
+          strip_tag_prefix: v
+
+      - name: Deprecated Outillage builder
+        uses: aevea/kaniko-action@master
         with:
           image: outillage/release-notary
           username: ${{ secrets.DOCKERHUB_USERNAME }}
