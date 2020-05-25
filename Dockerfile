@@ -10,7 +10,7 @@ COPY go.mod go.sum Makefile /app/
 RUN make install_deps
 
 COPY . /app/
-RUN make build/docker
+RUN CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/release-notary .
 
 FROM alpine:3.11.6
 RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
