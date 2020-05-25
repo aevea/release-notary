@@ -24,4 +24,9 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: Test
-        run: make ci
+        run: |
+          export PATH=${PATH}:`go env GOPATH`/bin
+          go install github.com/magefile/mage
+          mage setuptest
+          mage test
+          mage gomodtidy
