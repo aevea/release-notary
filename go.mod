@@ -3,7 +3,7 @@ module github.com/aevea/release-notary
 go 1.13
 
 require (
-	github.com/aevea/git/v2 v2.2.0
+	github.com/aevea/git/v2 v2.3.0
 	github.com/aevea/integrations v0.4.0
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0
@@ -17,7 +17,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.0
-	github.com/stretchr/testify v1.6.0
+	github.com/stretchr/testify v1.6.1
 	gopkg.in/ini.v1 v1.51.1 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
