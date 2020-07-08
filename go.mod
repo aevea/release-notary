@@ -9,7 +9,7 @@ require (
 	github.com/aevea/quoad v0.4.0
 	github.com/go-git/go-git/v5 v5.1.0
 	github.com/json-iterator/go v1.1.10
-	github.com/magefile/mage v1.9.0
+	github.com/magefile/mage v1.10.0
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
