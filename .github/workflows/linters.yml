@@ -10,4 +10,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run Commitsar
-        uses: docker://aevea/commitsar@sha256:afecf08d41b766273234b09f7c5eb818af979225bad01c268cf5117fdc3f224c
+        uses: docker://aevea/commitsar@sha256:caf5539dd03309a539906c7ad45c2ecc0ae86a1ee2bf5dc538d7986c523526f3
