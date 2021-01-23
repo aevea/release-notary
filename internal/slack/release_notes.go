@@ -48,7 +48,7 @@ func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote GitRemoter)
 			}
 
 			sectionContext := slack.NewContextBlock(
-				"context",
+				"",
 				&slack.TextBlockObject{
 					Type: "mrkdwn",
 					Text: fmt.Sprintf(
