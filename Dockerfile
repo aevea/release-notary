@@ -6,8 +6,8 @@ RUN apk add --no-cache make git gcc musl-dev
 
 # This step is done separately than `COPY . /app/` in order to
 # cache dependencies.
-COPY go.mod go.sum Makefile /app/
-RUN make install_deps
+COPY go.mod go.sum /app/
+RUN go mod download
 
 COPY . /app/
 RUN CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/release-notary .
