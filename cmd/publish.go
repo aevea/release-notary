@@ -92,13 +92,22 @@ var publishCmd = &cobra.Command{
 
 		if viper.IsSet("GITHUB_TOKEN") {
 			split := strings.Split(viper.GetString("GITHUB_REPOSITORY"), "/")
+			ref := viper.GetString("GITHUB_REF")
 
 			options := releaser.Options{
 				Token:    viper.GetString("GITHUB_TOKEN"),
 				Owner:    split[0],
 				Repo:     split[1],
+				TagName:  integrations.GetCurrentRef(),
 				Provider: "github",
 			}
+
+			const tagRef = "/refs/tags/"
+
+			if strings.HasPrefix(ref, tagRef) {
+				options.TagName = strings.TrimPrefix(ref, tagRef)
+			}
+
 			service, err := releaser.CreateReleaser(options)
 			if err != nil {
 				return err
@@ -116,7 +125,7 @@ var publishCmd = &cobra.Command{
 			options := releaser.Options{
 				Token:     viper.GetString("GITLAB_TOKEN"),
 				APIURL:    viper.GetString("CI_API_V4_URL"),
-				TagName:   viper.GetString("CI_COMMIT_TAG"),
+				TagName:   integrations.GetCurrentRef(),
 				ProjectID: viper.GetInt("CI_PROJECT_ID"),
 				Provider:  "gitlab",
 			}
