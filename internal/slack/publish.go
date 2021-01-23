@@ -2,11 +2,10 @@ package slack
 
 import (
 	"bytes"
-	"net/http"
-	"time"
 
 	"github.com/aevea/quoad"
 	jsoniter "github.com/json-iterator/go"
+	"github.com/slack-go/slack"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -25,21 +24,11 @@ func jsonMarshal(t interface{}) ([]byte, error) {
 func (s *Slack) Publish(commits map[string][]quoad.Commit, remote GitRemoter) error {
 	releaseNotes := GenerateReleaseNotes(commits, remote)
 
-	client := http.Client{
-		Timeout: time.Second * 5,
+	msg := slack.WebhookMessage{
+		Blocks: &slack.Blocks{
+			BlockSet: releaseNotes,
+		},
 	}
 
-	jsonBody, err := jsonMarshal(releaseNotes)
-
-	if err != nil {
-		return err
-	}
-
-	_, err = client.Post(s.WebHookURL, "application/json", bytes.NewBuffer(jsonBody))
-
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return slack.PostWebhook(s.WebHookURL, &msg)
 }

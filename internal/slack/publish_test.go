@@ -19,19 +19,9 @@ func TestPublish(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody, err := ioutil.ReadFile("./testdata/expected_output.txt")
+		expectedBody, err := ioutil.ReadFile("./testdata/expected_output.json")
 
-		type BlockList struct {
-			Blocks []Block
-		}
-
-		var receivedBlocks, expectedBlocks BlockList
-
-		rbErr, ebErr := json.Unmarshal(body, &receivedBlocks), json.Unmarshal(expectedBody, &expectedBlocks)
-
-		assert.NoError(t, rbErr)
-		assert.NoError(t, ebErr)
-		assert.ElementsMatch(t, expectedBlocks.Blocks, receivedBlocks.Blocks)
+		assert.Equal(t, string(body), string(expectedBody))
 
 		_, err = rw.Write([]byte(`ok`))
 
@@ -45,20 +35,20 @@ func TestPublish(t *testing.T) {
 	}
 
 	testData := map[string][]quoad.Commit{
-		"features": []quoad.Commit{
-			quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"},
+		"features": {
+			{Category: "feat", Scope: "ci", Heading: "ci test"},
 		},
-		"bugs": []quoad.Commit{
-			quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"},
-			quoad.Commit{Category: "fix", Scope: "", Heading: "bug fix"},
+		"bugs": {
+			{Category: "bug", Scope: "", Heading: "huge bug"},
+			{Category: "fix", Scope: "", Heading: "bug fix"},
 		},
-		"chores": []quoad.Commit{
-			quoad.Commit{Category: "chore", Scope: "", Heading: "testing", Issues: []int{1, 2}},
-			quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{3}},
+		"chores": {
+			{Category: "chore", Scope: "", Heading: "testing", Issues: []int{1, 2}},
+			{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{3}},
 		},
-		"others": []quoad.Commit{
-			quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"},
-			quoad.Commit{Category: "bs", Scope: "", Heading: "random"},
+		"others": {
+			{Category: "other", Scope: "", Heading: "merge master in something"},
+			{Category: "bs", Scope: "", Heading: "random"},
 		},
 	}
 

@@ -2,11 +2,11 @@ package slack
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/aevea/quoad"
 	"github.com/aevea/release-notary/internal"
+	"github.com/slack-go/slack"
 )
 
 func pluralize(base string, count int) string {
@@ -31,88 +31,85 @@ func countReferences(commits []quoad.Commit) int {
 }
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote GitRemoter) WebhookMessage {
-	blocks := []Block{buildReleaseTitle(remote)}
+func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote GitRemoter) []slack.Block {
+	blocks := []slack.Block{buildReleaseTitle(remote)}
 
+	currentSection := 0
 	for name, commits := range sections {
 		if len(commits) > 0 {
 			sectionInfo := internal.PredefinedSections[name]
 
-			sectionTitle := Block{
+			sectionTitle := slack.SectionBlock{
 				Type: "section",
-				Section: content{
+				Text: &slack.TextBlockObject{
 					Type: "mrkdwn",
 					Text: fmt.Sprintf(":%s: *%s*", sectionInfo.Icon, sectionInfo.Title),
 				},
 			}
 
-			sectionContext := Block{
-				Type: "context",
-				Elements: []content{
-					content{
-						Type: "mrkdwn",
-						Text: fmt.Sprintf(
-							"%s referencing %s",
-							pluralize("commit", len(commits)),
-							pluralize("issue", countReferences(commits)),
-						),
-					},
+			sectionContext := slack.NewContextBlock(
+				"context",
+				&slack.TextBlockObject{
+					Type: "mrkdwn",
+					Text: fmt.Sprintf(
+						"%s referencing %s",
+						pluralize("commit", len(commits)),
+						pluralize("issue", countReferences(commits)),
+					),
 				},
-			}
-
-			sectionCommits := Block{
-				Type:    "section",
-				Section: buildCommitList(commits, remote.GetRemoteURL()),
-			}
+			)
 
 			blocks = append(
 				blocks,
 				sectionTitle,
 				sectionContext,
-				sectionCommits,
-				Block{Type: "divider"},
 			)
+
+			blocks = append(blocks, buildCommitList(commits, remote.GetRemoteURL())...)
+
+			// Check if there is another section following this one in order to display a divider
+			if currentSection+1 < len(sections) {
+				blocks = append(blocks, slack.NewDividerBlock())
+			}
+
+			currentSection++
 		}
 	}
 
-	return WebhookMessage{Blocks: blocks}
+	return blocks
 }
 
-func buildReleaseTitle(remote GitRemoter) Block {
-	// This is also quite hacky, it shouldn't be done here, but somewhere before
-	release, isGithub := os.LookupEnv("GITHUB_REPOSITORY")
-	remoteURL := remote.GetRemoteURL()
-
-	// TODO: Improve this logic
-	if !isGithub {
-		return Block{
-			Type: "section",
-			Section: content{
-				Type: "mrkdwn",
-				Text: fmt.Sprintf(
-					":tada: Release <%s/releases/tag/%s|*%s*> for <%s|*%s*>",
-					remoteURL,
-					release,
-					release,
-					remoteURL,
-					remote.Project(),
-				),
-			},
-		}
-	}
-
-	// For GitHub it will be skipped for now :/ We'll need to fetch it via the API
-	return Block{
-		Type: "section",
-		Section: content{
-			Type: "mrkdwn",
-			Text: fmt.Sprintf(":tada: New release for <%s|*%s*>", remoteURL, remote.Project()),
+func buildReleaseTitle(remote GitRemoter) slack.Block {
+	return slack.HeaderBlock{
+		Type: "header",
+		Text: &slack.TextBlockObject{
+			Type:  "plain_text",
+			Text:  fmt.Sprintf(":tada: New release for %s", remote.Project()),
+			Emoji: true,
 		},
 	}
 }
 
-func buildCommitList(commits []quoad.Commit, remote string) content {
+func buildCommitList(commits []quoad.Commit, remote string) []slack.Block {
 	builder := strings.Builder{}
+	blocks := []slack.Block{}
+
+	if len(commits) > 15 {
+		commits = commits[:15]
+		blocks = append(
+			blocks,
+			slack.NewContextBlock(
+				"",
+				&slack.TextBlockObject{
+					Type: "mrkdwn",
+					Text: fmt.Sprintf(
+						"Only last 15 commits shown. *Full changelog <%s|here>*",
+						remote,
+					),
+				},
+			),
+		)
+	}
 
 	for _, commit := range commits {
 		smallHash := commit.Hash.String()[:8]
@@ -148,7 +145,18 @@ func buildCommitList(commits []quoad.Commit, remote string) content {
 		builder.WriteString("\r\n")
 	}
 
-	section := content{Type: "mrkdwn", Text: builder.String()}
+	blocks = append(
+		[]slack.Block{
+			slack.SectionBlock{
+				Type: "section",
+				Text: &slack.TextBlockObject{
+					Type: "mrkdwn",
+					Text: builder.String(),
+				},
+			},
+		},
+		blocks...,
+	)
 
-	return section
+	return blocks
 }
