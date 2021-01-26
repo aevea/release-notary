@@ -31,19 +31,21 @@ func countReferences(commits []quoad.Commit) int {
 }
 
 // GenerateReleaseNotes creates a string from release notes that conforms with the Slack formatting. Expected format can be found in testdata.
-func GenerateReleaseNotes(sections map[string][]quoad.Commit, remote GitRemoter) []slack.Block {
+func GenerateReleaseNotes(changelog map[string][]quoad.Commit, remote GitRemoter) []slack.Block {
 	blocks := []slack.Block{buildReleaseTitle(remote)}
 
+	sections := internal.SortedSections
+
 	currentSection := 0
-	for name, commits := range sections {
+	for _, section := range sections {
+		commits := changelog[section.ID]
 		if len(commits) > 0 {
-			sectionInfo := internal.PredefinedSections[name]
 
 			sectionTitle := slack.SectionBlock{
 				Type: "section",
 				Text: &slack.TextBlockObject{
 					Type: "mrkdwn",
-					Text: fmt.Sprintf(":%s: *%s*", sectionInfo.Icon, sectionInfo.Title),
+					Text: fmt.Sprintf(":%s: *%s*", section.Icon, section.Title),
 				},
 			}
 
