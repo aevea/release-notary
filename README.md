@@ -82,7 +82,7 @@ Run the Release Notary action. Github token needs to be explicitly added so that
 
 ```yml
 - name: Release Notary Action
-  uses: commitsar-app/release-notary@v0.2.0 (substitute for current version)
+  uses: aevea/release-notary@v0.2.0 (substitute for current version)
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -94,7 +94,7 @@ release:
   stage: release
   variables:
     GITLAB_TOKEN: $RELEASE_TOKEN
-  image: commitsar/release-notary
+  image: aevea/release-notary
   script:
     - release-notary publish
   only:
