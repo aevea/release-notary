@@ -62,6 +62,36 @@ Slack integration posts release notes into Slack using the `Incoming webhook` in
 
 #### Using Github actions
 
+##### actions/checkout@v2
+
+actions/checkout@v2 behaves differently from the first version. It pulls in just the latest commit and does not pull any other git objects. Release Notary needs these objects in order to work.
+
+It should be run only on tags.
+
+Example workflow file:
+
+```yaml
+name: Release
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  release-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Release Notary Action
+        uses: docker://aevea/release-notary:0.9.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+##### actions/checkout@v1
+
 Should be run only on tags, example is [HERE](https://github.com/aevea/commitsar/blob/master/.github/workflows/release.yml):
 
 ```yml
