@@ -1,9 +1,8 @@
 package text
 
 import (
-	"log"
-
 	"github.com/aevea/quoad"
+	"github.com/apex/log"
 )
 
 // SplitSections accepts categorised commits and further organises them into separate sections for release notes
@@ -22,7 +21,7 @@ func SplitSections(categorisedCommits []quoad.Commit) map[string][]quoad.Commit 
 	for _, commit := range categorisedCommits {
 		var category = categoryMappings[commit.Category]
 		if category != "other" {
-			log.Println(category)
+			log.Debug(category)
 			sections[category] = append(sections[category], commit)
 		}
 

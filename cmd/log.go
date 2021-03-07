@@ -1,13 +1,10 @@
 package cmd
 
 import (
-	"io/ioutil"
-	"log"
-	"os"
-
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/aevea/quoad"
 	"github.com/aevea/release-notary/internal/text"
+	"github.com/apex/log"
 	"github.com/spf13/cobra"
 )
 
@@ -20,16 +17,11 @@ var logCmd = &cobra.Command{
 	Short: "Prints commits between two tags",
 	Long:  "In default prints the commits between 2 tags. Can be overriden to specify exact commits.",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		debugLogger := log.Logger{}
-		debugLogger.SetPrefix("[DEBUG] ")
-		debugLogger.SetOutput(os.Stdout)
-
-		if !Verbose {
-			debugLogger.SetOutput(ioutil.Discard)
-			debugLogger.SetPrefix("")
+		if Verbose {
+			log.SetLevel(log.DebugLevel)
 		}
 
-		repo, err := history.OpenGit(".", &debugLogger)
+		repo, err := history.OpenGit(".")
 
 		if err != nil {
 			return err
@@ -67,7 +59,7 @@ var logCmd = &cobra.Command{
 			)
 		}
 
-		log.Println(text.BuildHistory(parsedCommits))
+		log.Info(text.BuildHistory(parsedCommits))
 
 		return nil
 	},
