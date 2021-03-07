@@ -1,20 +1,13 @@
 package cmd
 
 import (
-	"fmt"
-	"log"
-	"os"
-
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "release-notary",
-	Short: "Commits up to last tag",
+	Short: "No root command available please check below",
 	Long:  "",
-	Run: (func(cmd *cobra.Command, args []string) {
-		log.Println("hi")
-	}),
 }
 
 // Verbose is used to allow verbose/debug output for any given command
@@ -29,9 +22,6 @@ func init() {
 }
 
 // Execute just executes the rootCmd for Cobra
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+func Execute() error {
+	return rootCmd.Execute()
 }

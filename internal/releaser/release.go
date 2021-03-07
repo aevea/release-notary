@@ -1,8 +1,9 @@
 package releaser
 
 import (
-	"fmt"
 	"strings"
+
+	"github.com/apex/log"
 )
 
 // Release pulls latest tag and its text, then it appends passed release notes
@@ -14,7 +15,7 @@ func (r *Releaser) Release(releaseNotes string) error {
 	}
 
 	if strings.Contains(latestRelease.Message, releaseNotes) {
-		fmt.Print("\nRelease already contains these release notes\n")
+		log.Warn("Release already contains these release notes")
 		return nil
 	}
 

@@ -2,18 +2,15 @@ package cmd
 
 import (
 	"errors"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
 	"strings"
 
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/aevea/integrations"
 	"github.com/aevea/quoad"
 	"github.com/aevea/release-notary/internal/releaser"
 	"github.com/aevea/release-notary/internal/slack"
 	"github.com/aevea/release-notary/internal/text"
+	"github.com/apex/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -30,16 +27,11 @@ var publishCmd = &cobra.Command{
 	Short: "Publishes release notes",
 	Long:  "",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		debugLogger := log.Logger{}
-		debugLogger.SetPrefix("[DEBUG] ")
-		debugLogger.SetOutput(os.Stdout)
-
-		if !Verbose {
-			debugLogger.SetOutput(ioutil.Discard)
-			debugLogger.SetPrefix("")
+		if Verbose {
+			log.SetLevel(log.DebugLevel)
 		}
 
-		repo, err := history.OpenGit(".", &debugLogger)
+		repo, err := history.OpenGit(".")
 
 		if err != nil {
 			return err
@@ -82,7 +74,7 @@ var publishCmd = &cobra.Command{
 		}
 
 		if DryRun {
-			fmt.Println("my job here is done...")
+			log.Info("my job here is done...")
 			return nil
 		}
 
@@ -118,7 +110,7 @@ var publishCmd = &cobra.Command{
 
 		if viper.IsSet("GITLAB_TOKEN") {
 			if !viper.IsSet("CI_COMMIT_TAG") {
-				fmt.Print("Release Notary is not running on a tag or CI_COMMIT_TAG is not set")
+				log.Error("Release Notary is not running on a tag or CI_COMMIT_TAG is not set")
 				return nil
 			}
 

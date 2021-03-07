@@ -1,10 +1,10 @@
 package text
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/aevea/quoad"
+	"github.com/apex/log"
 )
 
 // ReleaseNotes holds the required settings for generating ReleaseNotes
@@ -35,7 +35,7 @@ func (r *ReleaseNotes) Generate(sections map[string][]quoad.Commit, dryRun bool)
 	}
 
 	if dryRun {
-		fmt.Print(builder.String())
+		log.Info(builder.String())
 	}
 
 	return builder.String()
