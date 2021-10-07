@@ -21,7 +21,7 @@ var logCmd = &cobra.Command{
 			log.SetLevel(log.DebugLevel)
 		}
 
-		repo, err := history.OpenGit(".")
+		repo, err := history.OpenGit(RepoDir)
 
 		if err != nil {
 			return err
