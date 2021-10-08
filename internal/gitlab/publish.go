@@ -8,19 +8,19 @@ import (
 	"github.com/aevea/release-notary/internal/release"
 )
 
-// Publish publishes a Release https://docs.gitlab.com/ee/api/tags.html#create-a-new-release
+// Publish publishes a Release https://docs.gitlab.com/ee/api/releases/#create-a-release
 func (g *Gitlab) Publish(release *release.Release) error {
-	// By default we are creating a new release
+	// By default, we are creating a new release
 	method := "POST"
+	url := fmt.Sprintf("%v/projects/%v/releases", g.apiURL, g.projectID)
 
 	// In case release already exists we need to update instead of creating
 	if release.Message != "" {
+		url = fmt.Sprintf("%v/projects/%v/releases/%v", g.apiURL, g.projectID, g.tagName)
 		method = "PUT"
 	}
 
-	url := fmt.Sprintf("%v/projects/%v/repository/tags/%v/release", g.apiURL, g.projectID, g.tagName)
-
-	jsonBody, err := json.Marshal(gitlabRelease{Message: release.ReleaseNotes})
+	jsonBody, err := json.Marshal(gitlabRelease{Message: release.ReleaseNotes, TagName: g.tagName})
 
 	if err != nil {
 		return err
