@@ -17,7 +17,7 @@ func TestPublishExistingRelease(t *testing.T) {
 
 	newReleaseNotes := "test"
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-		url := fmt.Sprintf("/projects/%v/repository/tags/%v/release", projectID, tagName)
+		url := fmt.Sprintf("/projects/%v/releases/%v", projectID, tagName)
 		assert.Equal(t, "PUT", req.Method)
 		assert.Equal(t, url, req.URL.String())
 		assert.Equal(t, "testtoken", req.Header["Private-Token"][0])
@@ -26,7 +26,7 @@ func TestPublishExistingRelease(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody := fmt.Sprintf("{\"name\":\"\",\"description\":\"%v\"}", newReleaseNotes)
+		expectedBody := fmt.Sprintf("{\"name\":\"\",\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
 
 		assert.Equal(t, expectedBody, string(body))
 
@@ -55,7 +55,7 @@ func TestPublishNewRelease(t *testing.T) {
 
 	newReleaseNotes := "test"
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-		url := fmt.Sprintf("/projects/%v/repository/tags/%v/release", projectID, tagName)
+		url := fmt.Sprintf("/projects/%v/releases", projectID)
 		assert.Equal(t, "POST", req.Method)
 		assert.Equal(t, url, req.URL.String())
 		assert.Equal(t, "testtoken", req.Header["Private-Token"][0])
@@ -64,7 +64,7 @@ func TestPublishNewRelease(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody := fmt.Sprintf("{\"name\":\"\",\"description\":\"%v\"}", newReleaseNotes)
+		expectedBody := fmt.Sprintf("{\"name\":\"\",\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
 
 		assert.Equal(t, expectedBody, string(body))
 
