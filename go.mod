@@ -8,7 +8,7 @@ require (
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0
 	github.com/apex/log v1.9.0
-	github.com/go-git/go-git/v5 v5.2.0
+	github.com/go-git/go-git/v5 v5.4.2
 	github.com/json-iterator/go v1.1.12
 	github.com/magefile/mage v1.11.0
 	github.com/slack-go/slack v0.9.5
