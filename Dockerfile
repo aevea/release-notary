@@ -16,9 +16,18 @@ FROM alpine:3.14.2
 RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
 
+RUN addgroup --gid 10001 --system nonroot \
+    && adduser  --uid 10000 --system --ingroup nonroot --home /home/nonroot nonroot
+
+RUN apk add --no-cache tini
+
 WORKDIR /app
 COPY --from=builder /app/build/release-notary ./release-notary
 
 RUN ln -s $PWD/release-notary /usr/local/bin
 
-CMD [ "release-notary", "publish" ]
+USER nonroot
+
+ENTRYPOINT ["/sbin/tini", "--", "release-notary" ]
+
+CMD [ "publish" ]
