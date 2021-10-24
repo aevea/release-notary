@@ -92,6 +92,13 @@ func buildReleaseTitle(remote GitRemoter) slack.Block {
 	}
 }
 
+func addScope(scope string) string {
+	if scope == "" {
+		return ""
+	}
+	return fmt.Sprintf("*(%s)* ", scope)
+}
+
 func buildCommitList(commits []quoad.Commit, remote string) []slack.Block {
 	builder := strings.Builder{}
 	blocks := []slack.Block{}
@@ -118,10 +125,11 @@ func buildCommitList(commits []quoad.Commit, remote string) []slack.Block {
 
 		builder.WriteString(
 			fmt.Sprintf(
-				"`%s` <%s/commit/%s|*%s*>",
+				"`%s` <%s/commit/%s|%s%s>",
 				smallHash,
 				remote,
 				smallHash,
+				addScope(commit.Scope),
 				commit.Heading,
 			),
 		)
