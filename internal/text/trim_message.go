@@ -1,17 +1,14 @@
 package text
 
 import (
-	"regexp"
 	"strings"
 )
 
-var messageRegex = regexp.MustCompile("^.*\n")
-
 // TrimMessage returns only the first line of commit message
 func TrimMessage(message string) string {
-	match := messageRegex.FindString(message)
+	match := strings.Split(message, "\n")
 
-	match = strings.Replace(match, "\n", "", 1)
+	final := strings.TrimRight(match[0], " ")
 
-	return match
+	return final
 }

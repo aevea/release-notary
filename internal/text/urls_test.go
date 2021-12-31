@@ -7,13 +7,13 @@ import (
 )
 
 type urlTestStruct struct {
-	url string
+	url    string
 	commit string
 }
 
 func TestLinkToCommit(t *testing.T) {
 	tests := map[string]urlTestStruct{
-		"https://github.com/commisar-app/commitsar/commit/12345": urlTestStruct{url: "https://github.com/commisar-app/commitsar", commit:"12345"},
+		"https://github.com/commisar-app/commitsar/commit/12345": {url: "https://github.com/commisar-app/commitsar", commit: "12345"},
 	}
 
 	for expected, test := range tests {

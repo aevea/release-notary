@@ -38,7 +38,7 @@ func buildSimpleCommit(commit quoad.Commit) string {
 		builder.WriteString(" ")
 	}
 
-	builder.WriteString(commit.Heading)
+	builder.WriteString(TrimMessage(commit.Heading))
 
 	for _, refID := range commit.Issues {
 		builder.WriteString(fmt.Sprintf(" #%d", refID))
@@ -60,7 +60,7 @@ func buildFullCommit(commit quoad.Commit, open bool) string {
 	builder.WriteString("<summary>")
 	builder.WriteString(commit.Hash.String()[:7])
 	builder.WriteString(" ")
-	builder.WriteString(commit.Heading)
+	builder.WriteString(TrimMessage(commit.Heading))
 	builder.WriteString("</summary>")
 	builder.WriteString("\n\n")
 	builder.WriteString(commit.Body)
