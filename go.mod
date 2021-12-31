@@ -10,7 +10,7 @@ require (
 	github.com/apex/log v1.9.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/json-iterator/go v1.1.12
-	github.com/magefile/mage v1.11.0
+	github.com/magefile/mage v1.12.1
 	github.com/slack-go/slack v0.10.1
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0
