@@ -24,10 +24,10 @@ func TestReleaseNotes(t *testing.T) {
 	expected := string(b)
 
 	sections := map[string][]quoad.Commit{
-		"features": []quoad.Commit{quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test", Body: "- Body"}},
-		"chores":   []quoad.Commit{quoad.Commit{Category: "chore", Scope: "", Heading: "testing", Body: "- Body"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
-		"bugs":     []quoad.Commit{quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug", Body: "Body"}},
-		"others":   []quoad.Commit{quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
+		"features": {quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test", Body: "- Body"}},
+		"chores":   {quoad.Commit{Category: "chore", Scope: "", Heading: "testing", Body: "- Body"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
+		"bugs":     {quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug", Body: "Body"}},
+		"others":   {quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	releaseNotes := notes.Generate(sections, false)
@@ -50,10 +50,10 @@ func TestReleaseNotesSimple(t *testing.T) {
 	expected := string(b)
 
 	sections := map[string][]quoad.Commit{
-		"features": []quoad.Commit{quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
-		"chores":   []quoad.Commit{quoad.Commit{Category: "chore", Scope: "", Heading: "testing"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
-		"bugs":     []quoad.Commit{quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"}},
-		"others":   []quoad.Commit{quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
+		"features": {quoad.Commit{Category: "feat", Scope: "ci", Heading: "ci test"}},
+		"chores":   {quoad.Commit{Category: "chore", Scope: "", Heading: "testing"}, quoad.Commit{Category: "improvement", Scope: "", Heading: "this should end up in chores", Issues: []int{12}}},
+		"bugs":     {quoad.Commit{Category: "bug", Scope: "", Heading: "huge bug"}},
+		"others":   {quoad.Commit{Category: "other", Scope: "", Heading: "merge master in something"}, quoad.Commit{Category: "bs", Scope: "", Heading: "random"}},
 	}
 
 	releaseNotes := notes.Generate(sections, false)
@@ -66,7 +66,7 @@ func TestReleaseNotesWithMissingSections(t *testing.T) {
 	expected := "\n\n## :rocket: Features\n\n- 0000000 ci test\n\n"
 
 	sections := map[string][]quoad.Commit{
-		"features": []quoad.Commit{quoad.Commit{Heading: "ci test"}},
+		"features": {quoad.Commit{Heading: "ci test"}},
 	}
 
 	releaseNotes := notes.Generate(sections, false)

@@ -15,7 +15,7 @@ func BuildHistory(messages []quoad.Commit) string {
 		builder.WriteString("- ")
 		builder.WriteString(messages[i].Category)
 		builder.WriteString("   ")
-		builder.WriteString(messages[i].Heading)
+		builder.WriteString(TrimMessage(messages[i].Heading))
 		builder.WriteString("\n")
 	}
 
