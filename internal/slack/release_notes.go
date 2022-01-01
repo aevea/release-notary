@@ -6,6 +6,7 @@ import (
 
 	"github.com/aevea/quoad"
 	"github.com/aevea/release-notary/internal"
+	"github.com/aevea/release-notary/internal/text"
 	"github.com/slack-go/slack"
 )
 
@@ -45,7 +46,7 @@ func GenerateReleaseNotes(changelog map[string][]quoad.Commit, remote GitRemoter
 				Type: "section",
 				Text: &slack.TextBlockObject{
 					Type: "mrkdwn",
-					Text: fmt.Sprintf(":%s: *%s*", section.Icon, section.Title),
+					Text: fmt.Sprintf(":%s: *%s*", section.Icon, text.TrimMessage(section.Title)),
 				},
 			}
 
