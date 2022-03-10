@@ -403,8 +403,8 @@ github.com/sergi/go-diff v1.1.0/go.mod h1:STckp+ISIX8hZLjrqAeVduY0gWCT9IjLuqbuNX
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.1/go.mod h1:ni0Sbl8bgC9z8RoU9G6nDWqqs/fq4eDPysMBDgk/93Q=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
-github.com/slack-go/slack v0.10.1 h1:BGbxa0kMsGEvLOEoZmYs8T1wWfoZXwmQFBb6FgYCXUA=
-github.com/slack-go/slack v0.10.1/go.mod h1:wWL//kk0ho+FcQXcBTmEafUI5dz4qz5f4mMk8oIkioQ=
+github.com/slack-go/slack v0.10.2 h1:KMN/h2sgUninHXvQI8PrR/PHBUuWp2NPvz2Kr66tki4=
+github.com/slack-go/slack v0.10.2/go.mod h1:5FLdBRv7VW/d9EBxx/eEktOptWygbA9K2QK/KW7ds1s=
 github.com/smartystreets/assertions v1.0.0/go.mod h1:kHHU4qYBaI3q23Pp3VPrmWhuIUrLW/7eUrw0BU5VaoM=
 github.com/smartystreets/go-aws-auth v0.0.0-20180515143844-0c1422d1fdb9/go.mod h1:SnhjPscd9TpLiy1LpzGSKh3bXCfxxXuqd9xmQJy3slM=
 github.com/smartystreets/gunit v1.0.0/go.mod h1:qwPWnhz6pn0NnRBP++URONOVyNkPyr4SauJk4cUOwJs=
