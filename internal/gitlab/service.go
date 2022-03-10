@@ -14,7 +14,6 @@ type Gitlab struct {
 }
 
 type gitlabRelease struct {
-	Name    string `json:"name"`
 	TagName string `json:"tag_name"`
 	Message string `json:"description"`
 }

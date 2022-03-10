@@ -26,7 +26,7 @@ func TestPublishExistingRelease(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody := fmt.Sprintf("{\"name\":\"\",\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
+		expectedBody := fmt.Sprintf("{\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
 
 		assert.Equal(t, expectedBody, string(body))
 
@@ -64,7 +64,7 @@ func TestPublishNewRelease(t *testing.T) {
 
 		assert.NoError(t, err)
 
-		expectedBody := fmt.Sprintf("{\"name\":\"\",\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
+		expectedBody := fmt.Sprintf("{\"tag_name\":\"%v\",\"description\":\"%v\"}", tagName, newReleaseNotes)
 
 		assert.Equal(t, expectedBody, string(body))
 
