@@ -43,12 +43,12 @@ In Github actions GITHUB_TOKEN is provided with the correct access rights, elsew
 
 In Gitlab CI all the values are provided except for `GITLAB_TOKEN`. Documentation provided [here](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html).
 
-| Name          | Example value                                                  | Required |
-| ------------- | -------------------------------------------------------------- | -------- |
-| GITLAB_TOKEN  | token                                                          | true     |
-| CI_API_V4_URL | https://gitlab.com/api/v4                                      | true     |
-| CI_COMMIT_TAG | v0.0.4                                                         | true     |
-| CI_PROJECT_ID | 1234                                                           | true     |
+| Name          | Example value             | Required |
+| ------------- | ------------------------- | -------- |
+| GITLAB_TOKEN  | token                     | true     |
+| CI_API_V4_URL | https://gitlab.com/api/v4 | true     |
+| CI_COMMIT_TAG | v0.0.4                    | true     |
+| CI_PROJECT_ID | 1234                      | true     |
 
 ### Slack
 
@@ -124,7 +124,9 @@ release:
   stage: release
   variables:
     GITLAB_TOKEN: $RELEASE_TOKEN
-  image: aevea/release-notary
+  image:
+    name: aevea/release-notary:latest
+    entrypoint: [""]
   script:
     - release-notary publish
   only:
