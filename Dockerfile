@@ -6,28 +6,29 @@ RUN apk add --no-cache make git gcc musl-dev
 
 # This step is done separately than `COPY . /app/` in order to
 # cache dependencies.
-COPY go.mod go.sum /app/
+COPY go.mod go.sum Makefile /app/
 RUN go mod download
 
 COPY . /app/
-RUN CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/release-notary .
+RUN make build/docker
 
 FROM alpine:3.16.2
+
+LABEL repository="https://github.com/aevea/release-notary"
+LABEL homepage="https://github.com/aevea/release-notary"
+LABEL maintainer="Simon Prochazka <simon@fallion.net>"
+
+LABEL com.github.actions.name="Release Notary Action"
+LABEL com.github.actions.description="Create release notes"
+LABEL com.github.actions.icon="code"
+LABEL com.github.actions.color="blue"
+
 RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
-
-RUN addgroup --gid 10001 --system nonroot \
-    && adduser  --uid 10000 --system --ingroup nonroot --home /home/nonroot nonroot
-
-RUN apk add --no-cache tini
 
 WORKDIR /app
 COPY --from=builder /app/build/release-notary ./release-notary
 
 RUN ln -s $PWD/release-notary /usr/local/bin
 
-USER nonroot
-
-ENTRYPOINT ["/sbin/tini", "--", "release-notary" ]
-
-CMD [ "publish" ]
+CMD ["release-notary"]
