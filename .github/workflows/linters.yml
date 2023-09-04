@@ -10,4 +10,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run Commitsar
-        uses: docker://aevea/commitsar:0.20.1
+        uses: docker://aevea/commitsar:0.20.2
