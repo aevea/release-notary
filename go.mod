@@ -12,7 +12,7 @@ require (
 	github.com/json-iterator/go v1.1.12
 	github.com/magefile/mage v1.14.0
 	github.com/slack-go/slack v0.11.3
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.13.0
 	github.com/stretchr/testify v1.8.1
 )
@@ -30,7 +30,7 @@ require (
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
-	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
