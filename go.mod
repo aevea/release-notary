@@ -14,7 +14,7 @@ require (
 	github.com/slack-go/slack v0.11.3
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.13.0
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
