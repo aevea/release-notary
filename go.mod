@@ -1,6 +1,6 @@
 module github.com/aevea/release-notary
 
-go 1.19
+go 1.25
 
 require (
 	github.com/aevea/git/v3 v3.1.0
@@ -11,10 +11,10 @@ require (
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/json-iterator/go v1.1.12
 	github.com/magefile/mage v1.15.0
-	github.com/slack-go/slack v0.11.3
+	github.com/slack-go/slack v0.23.1
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.18.2
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
@@ -30,7 +30,7 @@ require (
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.5.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
