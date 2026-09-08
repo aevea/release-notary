@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/aevea/git/v3 v3.1.0
+	github.com/aevea/git/v4 v4.0.1
 	github.com/aevea/integrations v0.5.0
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0
@@ -14,7 +15,7 @@ require (
 	github.com/slack-go/slack v0.11.3
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.18.2
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
